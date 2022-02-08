@@ -22,7 +22,7 @@ Route::group(['namespace' => 'Auth','prefix' => 'auth'],function (){
     Route::POST('register','AuthController@register');
     Route::get('getProfile','AuthController@getProfile');
     Route::POST('update_profile','AuthController@update_profile');
-    Route::POST('insert_token','AuthController@insert_token');
+    Route::POST('inser_token','AuthController@insert_token');
 
 
 

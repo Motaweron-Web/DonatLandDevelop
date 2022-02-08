@@ -29,6 +29,7 @@ Route::group(['namespace' => 'Order','middleware'=>'admin','prefix'=>'orders'],f
     Route::view('/','Web.index');
 //    Route::get('admins',[AdminController::class,'index']);
     Route::get('new',[OrderController::class,'new_orders']);
+    Route::get('current',[OrderController::class,'current_orders']);
 //    Route::get('provider_orders/{id}','OrderController@provider_orders')->name('provider_orders');
 //    Route::get('user_orders/{id}','OrderController@user_orders')->name('user_orders');
     Route::get('order_accept/{id}',[OrderController::class,'order_accept'])->name('order_accept');

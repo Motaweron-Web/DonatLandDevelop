@@ -11,10 +11,22 @@ class OrderController extends Controller
 {
     public function new_orders(){
         $drivers = Representative::whereDoesntHave('current_orders')->select('id','name')->get();
-        $data = Order::where('status','append')->latest()->get();
+
+        $data = Order::where(['status'=>'accept','delivery_status'=>'rejected'])
+            ->orwhere('status','append')
+            ->latest()->get();
+//        return $data;
         return view('Web.CRUD.Orders.New.index',compact('data','drivers'));
     }
-
+//============================================================================
+    public function current_orders(){
+        $data = Order::where(['status'=>'accept'])
+            ->whereIn('delivery_status',['accepted','on_way'])
+            ->latest()->get();
+//        return $data;
+        return view('Web.CRUD.Orders.Current.index',compact('data'));
+    }
+//============================================================================
 
 
 

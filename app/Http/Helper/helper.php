@@ -711,7 +711,7 @@ if (!function_exists('cancel_order_count')) {
 }
 if (!function_exists('helperJson')) {
     function helperJson($data=null,$message='',$code=200,$status=200) {
-        $json = response()->json(['data'=>$data,'message'=>$message,'code'=>$code],$status);
+        $json = response()->json(['data'=>$data,'message'=>$message,'status'=>$code],$status);
         return $json;
     }
 }
