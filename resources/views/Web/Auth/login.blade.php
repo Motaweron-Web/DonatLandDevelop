@@ -62,7 +62,8 @@
                                             <p class="mb-0 text-secondary">
                                                 Copyright © <script>
                                                     document.write(new Date().getFullYear())
-                                                </script> Soft by {{$setting->developed_by}}.
+                                                </script>
+{{--                                                Soft by {{$setting->developed_by}}.--}}
                                             </p>
                                         </div>
                                     </div>

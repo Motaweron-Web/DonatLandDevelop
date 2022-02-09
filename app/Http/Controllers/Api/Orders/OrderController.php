@@ -43,12 +43,12 @@ class OrderController extends Controller
         ];
         $validator = Validator::make($request->all(),$rules);
         if ($validator->fails()){
-            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],422);
+            return response()->json(['data'=>null,'message'=>$validator->errors(),'status'=>422],422);
         }else{
             $customer = Customers::where('id',$request->customer_id)->first();
 //            return $customer;
             if ($request->grand_total > $customer->total &&  $request->payment_type == 'wallet' ){
-                return response()->json(['data'=>null,'message'=>'رصيدك ('.$customer->total.') غير كافى لهذا الطلب ','code'=>409],200);
+                return response()->json(['data'=>null,'message'=>'رصيدك ('.$customer->total.') غير كافى لهذا الطلب ','status'=>409],200);
             }
 
             $order = $request->except('details');
@@ -66,7 +66,7 @@ class OrderController extends Controller
             }
             $data = Order::where('id',$last_order->id)->with('details')->first();
 
-            return response()->json(['data'=>$data,'message'=>'order stored successfully','code'=>'200'],200);
+            return response()->json(['data'=>$data,'message'=>'order stored successfully','status'=>'200'],200);
         }
     }//end fun
 
@@ -77,10 +77,10 @@ class OrderController extends Controller
         ];
         $validator = Validator::make($request->all(),$rules);
         if ($validator->fails()){
-            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],422);
+            return response()->json(['data'=>null,'message'=>$validator->errors(),'status'=>422],422);
         }else{
             $order = Order::where('id',$request->order_id)->with('details.product','branch','customer')->first();
-            return response()->json(['data'=>$order,'message'=>'','code'=>'200'],200);
+            return response()->json(['data'=>$order,'message'=>'','status'=>'200'],200);
         }
     }
 

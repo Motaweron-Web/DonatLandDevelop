@@ -14,7 +14,7 @@ class TermsController extends Controller
 //        $terms = GeneralSetting::first();
 //        $id = '3';
         $data = url('/api/terms/terms_view/3') ;
-        return response()->json(['data'=>$data,'message'=>'','code'=>200],'200');
+        return response()->json(['data'=>$data,'message'=>'','status'=>200],'200');
 
     }
 
@@ -22,12 +22,12 @@ class TermsController extends Controller
 //        $terms = GeneralSetting::first();
 //        $id = '2';
         $data = url('/api/terms/terms_view/2') ;
-        return response()->json(['data'=>$data,'message'=>'','code'=>200],'200');
+        return response()->json(['data'=>$data,'message'=>'','status'=>200],'200');
     }
 
     public function taxes(){
 //        $terms = Tax::all();
         $setting = GeneralSetting::first();
-        return response()->json(['data'=>$setting,'message'=>'','code'=>200],'200');
+        return response()->json(['data'=>$setting,'message'=>'','status'=>200],'200');
     }
 }

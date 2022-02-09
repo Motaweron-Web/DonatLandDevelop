@@ -17,10 +17,10 @@ class ContactController extends Controller
         ];
         $validator = Validator::make($request->all(),$rules);
         if ($validator->fails()){
-            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],422);
+            return response()->json(['data'=>null,'message'=>$validator->errors(),'status'=>422],422);
         }else{
             $contact = Contact::create($request->all());
-            return response()->json(['data'=>$contact,'message'=>'message stored successfully','code'=>'200'],200);
+            return response()->json(['data'=>$contact,'message'=>'message stored successfully','status'=>'200'],200);
         }
 
 

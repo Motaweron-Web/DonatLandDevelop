@@ -35,7 +35,7 @@ class AuthController extends Controller
         ];
         $validator = Validator::make($request->all(),$rules);
         if ($validator->fails()){
-            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],200);
+            return response()->json(['data'=>null,'message'=>$validator->errors(),'status'=>422],200);
         }
         $data = $request->validate($rules);
             $user = Customers::where($data);
@@ -66,7 +66,7 @@ class AuthController extends Controller
         ];
         $validator = Validator::make($request->all(),$rules);
         if ($validator->fails()){
-            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],200);
+            return response()->json(['data'=>null,'message'=>$validator->errors(),'status'=>422],200);
         }
         $data = $request->validate($rules);
 
@@ -106,7 +106,7 @@ class AuthController extends Controller
         ];
         $validator = Validator::make($request->all(),$rules);
         if ($validator->fails()){
-            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],200);
+            return response()->json(['data'=>null,'message'=>$validator->errors(),'status'=>422],200);
         }else{
             PhoneToken::where('phone_token',$request->phone_token)->delete();
             \auth()->logout();
@@ -159,7 +159,7 @@ class AuthController extends Controller
         ];
         $validator = Validator::make($request->all(),$rules);
         if ($validator->fails()){
-            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],200);
+            return response()->json(['data'=>null,'message'=>$validator->errors(),'status'=>422],200);
         }else {
             $data = $request->all();
             if ($request->hasFile('photo')){
@@ -184,7 +184,7 @@ class AuthController extends Controller
         ];
         $validator = Validator::make($request->all(),$rules);
         if ($validator->fails()){
-            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],200);
+            return response()->json(['data'=>null,'message'=>$validator->errors(),'status'=>422],200);
         }else{
             $data = PhoneToken::updateOrCreate($request->all());
             return helperJson($data,'token added successfully');
