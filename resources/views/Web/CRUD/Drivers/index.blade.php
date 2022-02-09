@@ -6,6 +6,11 @@
 {{--     عرض المشرفين--}}
 {{--@endsection--}}
 @section('content')
+    <style>
+        img:hover{
+            transform: scale(3)
+        }
+    </style>
     <div class="row">
         <div class=" col-12">
             <div class="card">
@@ -36,9 +41,9 @@
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
                                         <td class="align-middle text-center text-sm">
-                                            <span class="text-secondary text-xs font-weight-bold">
-                                              {{get_file($data->photo)}}
-                                            </span>
+                                            <div>
+                                                <img src="{{get_file($data->photo)}}" alt="delivery image" onclick="window.open(this.src)" class="avatar avatar-md me-3">
+                                            </div>
                                         </td>
                                         <td class="align-middle text-center text-sm">
                                             <span class="text-secondary text-xs font-weight-bold">
@@ -47,10 +52,10 @@
                                         </td>
                                         <td class="align-middle ">
                                             <div class="row">
-                                                <a    class=" col-3 details_element" data_route="{{aurl('orders/order_details/'.$data->id)}}"  data-toggle="tooltip" data-placement="top" title="التفاصيل">
+                                                <a    class=" col-6 details_element text-center" data_route="{{aurl('orders/order_details/'.$data->id)}}"  data-toggle="tooltip" data-placement="top" title="التفاصيل">
                                                     <i class="fas fa-search "  style="color: #0982bf"  ></i>
                                                 </a>
-                                                <a    class=" col-3 delete_element"  data_delete="{{aurl('orders/order_delete')}}" data_id="{{$data->id}}" data-original-title="delete order" data-toggle="tooltip" data-placement="top" title="حذف">
+                                                <a    class=" col-6 delete_element text-center"  data_delete="{{aurl('drivers/delivery_delete')}}" data_id="{{$data->id}}" data-original-title="delete order" data-toggle="tooltip" data-placement="top" title="حذف">
                                                     <i class="fa fa-trash "  style="color: #ce031b" ></i>
                                                 </a>
                                             </div>

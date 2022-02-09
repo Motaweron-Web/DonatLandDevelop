@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\{
   Auth\AuthController,
   Admin\AdminController,
+  Delivery\DeliveryController,
   Order\OrderController
 };
 /*
@@ -41,6 +42,7 @@ Route::group(['namespace' => 'Order','middleware'=>'admin','prefix'=>'orders'],f
 
 Route::group(['namespace' => 'Delivery','middleware'=>'admin','prefix'=>'drivers'],function (){
     Route::get('all',[DeliveryController::class,'index']);
+    Route::post('driver_delete',[DeliveryController::class,'driver_delete'])->name('driver_delete');
 
 });
 
