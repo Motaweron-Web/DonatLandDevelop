@@ -37,7 +37,7 @@ class OrderController extends Controller
             'receive_type'=>'required',
             'payment_type'=>'required',
             'notes'=>'nullable',
-            'address'=>'required',
+            'address'=>'nullable',
             'latitude'=>'nullable|regex:/^\d+(\.\d{1,9})?$/',
             'longitude'=>'nullable|regex:/^\d+(\.\d{1,9})?$/',
         ];
