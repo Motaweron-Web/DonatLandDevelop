@@ -48,6 +48,6 @@ Route::fallback(function () {
     return view('Web/index');
 });
 
-Route::get('aa',function(){
-    return 55;
-});
+//Route::get('aa',function(){
+//    return 55;
+//});
