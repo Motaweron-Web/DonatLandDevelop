@@ -43,3 +43,7 @@ Route::group(['namespace' => 'Order','middleware'=>'admin','prefix'=>'orders'],f
 Route::fallback(function () {
     return view('Web/index');
 });
+
+Route::get('aa',function(){
+    return 1;
+});
