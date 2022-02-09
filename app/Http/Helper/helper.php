@@ -743,26 +743,26 @@ if (!function_exists('fireBase')) {
         ];
 
 
-        $new = \App\Models\Notification::create($data);
+//        $new = \App\Models\Notification::create($data);
         $url = 'https://fcm.googleapis.com/fcm/send';
         $representative_tokens = \App\Models\RepresentativeToken::where('rev_id', $rev_id)->pluck('token')->toArray();
-        $user_tokens = \App\Models\UserToken::where('user_id', $user_id)->pluck('token')->toArray();
+//        $user_tokens = \App\Models\UserToken::where('user_id', $user_id)->pluck('token')->toArray();
 
 
-        if($user_id != null) {
-            $fields = array(
-                'registration_ids' => $user_tokens,
-                'title' => $data,
-                'body' => $data
-            );
-        }
-        else{
+//        if($user_id != null) {
+////            $fields = array(
+////                'registration_ids' => $user_tokens,
+////                'title' => $data,
+////                'body' => $data
+////            );
+//        }
+//        else{
             $fields = array(
                 'registration_ids' => $representative_tokens,
                 'title' => $data,
                 'body' => $data
             );
-        }
+//        }
         $fields = json_encode($fields);
         $headers = array(
             'Authorization: key=' . "AAAAAQl81dQ:APA91bHMDfE_s5pBeuRWvAWi4HM0Xg7G4JKaUVrEkMCDXyz4h4x1iYEu8rHe1DGi29zVqjX6hdIoVgWYPZxdZpABPPs2AYOZSp7b5Tn8O59fIMzmq9nWaMfSmE5o2vskKxuliSER7GFw",

@@ -89,6 +89,12 @@
                             </a>
                         </li>
                         <li class="nav-item ">
+                            <a class="nav-link " href="{{aurl('orders/previous')}}">
+                                <span class="sidenav-mini-icon"> ط ح </span>
+                                <span class="sidenav-normal"> الطلبات المنتهية <b class="caret"></b></span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
                             <a class="nav-link " {{--data-bs-toggle="collapse" aria-expanded="false"--}} href="#profileExample">
                                 <span class="sidenav-mini-icon"> م </span>
                                 <span class="sidenav-normal"> المستخدمين <b class="caret"></b></span>

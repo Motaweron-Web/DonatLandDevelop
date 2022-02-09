@@ -25,16 +25,16 @@ class OrderController extends Controller
     use GeneralTrait;
     public function currentOrders(Request $request)
     {
-//        $rules = [
-//            'user_id'=>'required|exists:representative,id',
-//        ];
-//        $validator = Validator::make($request->all(),$rules);
-//        if ($validator->fails()){
-//            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],200);
-//        }
+        $rules = [
+            'user_id'=>'required|exists:representative,id',
+        ];
+        $validator = Validator::make($request->all(),$rules);
+        if ($validator->fails()){
+            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],200);
+        }
 
         $data   = Order::where('status', 'accept')->WhereIn('delivery_status', ['append','accepted','on_way'])
-            ->where('delivery_id',delivery()->user()->id)
+            ->where('delivery_id',$request->user_id)
             ->with('details.product','branch','customer')
             ->latest()
             ->get();

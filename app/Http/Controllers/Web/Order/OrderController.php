@@ -21,16 +21,20 @@ class OrderController extends Controller
 //============================================================================
     public function current_orders(){
         $data = Order::where(['status'=>'accept'])
-            ->whereIn('delivery_status',['accepted','on_way'])
+            ->whereIn('delivery_status',['append','accepted','on_way'])
             ->latest()->get();
 //        return $data;
         return view('Web.CRUD.Orders.Current.index',compact('data'));
     }
 //============================================================================
+    public function previous_orders(){
+        $data = Order::whereIn('status',['end','cancel'])
+            ->latest()->get();
+//        return $data;
+        return view('Web.CRUD.Orders.Previous.index',compact('data'));
+    }
+//============================================================================
 
-
-
-    //========================================================
     public function order_delete(Request $request){
 //        return 1;
         Order::whereId($request->id)->delete();
@@ -45,7 +49,7 @@ class OrderController extends Controller
         $order->delivery_id = $request->delivery_id;
         $order->save();
 //        return $order;
-        toastr()->info('تم قبول الحجز');
+//        toastr()->info('تم قبول الحجز');
         return redirect()->back();
     }//end fun
 
@@ -55,7 +59,6 @@ class OrderController extends Controller
         $order = Order::where('id',$id)->first();
         $order->status = 'cancel';
         $order->save();
-        toastr()->warning('تم رفض الحجز');
         return redirect()->back();
     }//end fun
 
@@ -63,9 +66,18 @@ class OrderController extends Controller
 
     public function order_end($id){
         $order = Order::where('id',$id)->first();
-        $order->status = 'ended';
+        $order->status = 'end';
         $order->save();
-        toastr()->success('تم انهاء الحجز');
+//        return $order;
         return redirect()->back();
+    }//end fun
+
+    //==========================================================
+
+    public function order_details($id){
+        $order = Order::with('details.product')->where('id',$id)->first();
+        $details = $order->details;
+        $HTML = view('Web.CRUD.Orders.Current.components.details',compact('details'))->render();
+        return response()->json($HTML);
     }//end fun
 }
