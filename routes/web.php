@@ -37,6 +37,10 @@ Route::group(['namespace' => 'Order','middleware'=>'admin','prefix'=>'orders'],f
     Route::get('order_details/{id}',[OrderController::class,'order_details'])->name('order_details');
     Route::post('order_delete',[OrderController::class,'order_delete'])->name('order_delete');
 
+});
+
+Route::group(['namespace' => 'Delivery','middleware'=>'admin','prefix'=>'drivers'],function (){
+    Route::get('all',[DeliveryController::class,'index']);
 
 });
 
