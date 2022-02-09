@@ -41,5 +41,4 @@ class Deliveries extends Authenticatable  implements JWTSubject
         return [];
     }
 
-
 }//end class

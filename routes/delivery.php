@@ -22,6 +22,10 @@ Route::group(['namespace' => 'Orders','prefix' => 'orders'],function (){
     Route::get('order_details', 'OrderController@orderDetails');
 
 });
+//================================== contact ============================
+Route::group(['namespace' => 'Contact'],function (){
+    Route::post('contact_us', 'ContactUsController@index')->name('contact_us');
+});
 
 Route::fallback(function () {
     return helperJson(null,'URL NOT FOUND!',404);

@@ -49,7 +49,7 @@ class Customers extends Authenticatable  implements JWTSubject
 
     public function getTotalAttribute()
     {
-        return $this->share_gifts ?? 0 + $this->purchase_gifts ??0;
+        return (float)$this->share_gifts  + (float)$this->purchase_gifts ;
     }
 
 }//end class
