@@ -29,7 +29,7 @@ class Representative extends Authenticatable implements JWTSubject
     public function canncelled(){
         return $this->hasMany(RepresentativeCancelledOrders::class,'representative_id');
     }
-    public function has_orders(){
+    public function current_orders(){
         return $this->hasMany(Order::class,'driver_id')->whereIn('delivery_status',['append','new','accept']);
     }
 
