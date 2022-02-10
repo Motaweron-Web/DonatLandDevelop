@@ -2,10 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\{
-  Auth\AuthController,
-  Admin\AdminController,
-  Delivery\DeliveryController,
-  Order\OrderController
+    Auth\AuthController,
+    Admin\AdminController,
+    Delivery\DeliveryController,
+    Clients\ClientController,
+    Order\OrderController
 };
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +21,11 @@ use App\Http\Controllers\Web\{
 //================================ Auth ==============================
 
 Route::group(['namespace' => 'Admin'],function (){
-//    Route::view('/','Web.index');
     Route::get('login',[AuthController::class,'login'])->name('login');
     Route::post('login',[AuthController::class,'doLogin'])->name('submit.login');
+});
+Route::group(['namespace' => 'Admin','middleware'=>'admin'],function (){
+    Route::view('/','Web.index');
     Route::get('logout',[AuthController::class,'logout'])->name('logout');
 });
 
@@ -42,12 +45,19 @@ Route::group(['namespace' => 'Order','middleware'=>'admin','prefix'=>'orders'],f
 
 Route::group(['namespace' => 'Delivery','middleware'=>'admin','prefix'=>'drivers'],function (){
     Route::get('all',[DeliveryController::class,'index']);
+    Route::post('new',[DeliveryController::class,'add_driver']);
+    Route::get('edit/{id}',[DeliveryController::class,'edit_driver']);
+    Route::post('update',[DeliveryController::class,'driver_update']);
     Route::post('driver_delete',[DeliveryController::class,'driver_delete'])->name('driver_delete');
+});
 
+Route::group(['namespace' => 'Client','middleware'=>'admin','prefix'=>'clients'],function (){
+    Route::get('all',[ClientController::class,'index']);
+    Route::post('client_delete',[ClientController::class,'client_delete'])->name('client_delete');
 });
 
 Route::fallback(function () {
-    return view('Web/index');
+    return substr(url()->current(), -1);
 });
 
 //Route::get('aa',function(){

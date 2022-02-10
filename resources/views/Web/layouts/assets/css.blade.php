@@ -1,6 +1,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="csrf-token" content="{{csrf_token()}}">
+<meta http-equiv='content-Type' content='text/html; charset=UTF-8'/>
 <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
 <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
 <title> @yield('title') </title>
@@ -56,3 +57,6 @@
      /*}*/
 
 </style>
+
+{{--================================  dropfy  ===================--}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css" integrity="sha512-In/+MILhf6UMDJU4ZhDL0R0fEpsp4D3Le23m6+ujDWXwl3whwpucJG1PEmI3B07nyJx+875ccs+yX2CqQJUxUw==" crossorigin="anonymous" referrerpolicy="no-referrer" />

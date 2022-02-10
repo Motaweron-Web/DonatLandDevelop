@@ -169,9 +169,17 @@ class AuthController extends Controller
             }
             Customers::where('id',$request->id)->update($data);
             $user = Customers::where('id',$request->id)->first();
-            $data_ = null;
-            $data_['user'] = $user;
-            return helperJson($data_,'profile updated successfully');
+//            return $user;
+//            $data_ = null;
+//            $data_['user'] = $user;
+
+                if (! $token = JWTAuth::fromUser($user)) {
+                    return helperJson(null,'there is no user',400);
+                }
+                return helperJson($this->respondWithToken($token,$user),'profile updated successfully');
+
+
+//            return helperJson($data_,'profile updated successfully');
         }
 
     }//end fun

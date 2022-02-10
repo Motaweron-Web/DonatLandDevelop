@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse px-0 w-auto h-auto h-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link {{--{{ request()->is('admin/*') || checkActive(url('admin')) ? 'active' : '' }}--}}" href="{{url('admin')}}" >
+                <a class="nav-link  {{--{{ request()->is('admin/*') || checkActive(url('admin')) ? 'active' : '' }}--}}" href="{{url('admin')}}" >
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center ms-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>shop </title>
@@ -31,10 +31,10 @@
 
             </li>
             <li class="nav-item mt-3">
-                <h6 class="ps-4 me-4 text-uppercase text-xs font-weight-bolder opacity-6">المستخدمين</h6>
+                <h6 class="ps-4 me-4 text-uppercase text-xs font-weight-bolder opacity-6">الادارات الرئيسية</h6>
             </li>
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link active" aria-controls="pagesExamples" role="button" aria-expanded="false">
+                <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link active_main_tap {{substr(url()->current(), -1) == url('/').'/admin/orders' ? 'active' :''}}" aria-controls="pagesExamples" role="button" aria-expanded="false">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center ms-2">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>office</title>
@@ -55,7 +55,7 @@
                 <div class="collapse  show " id="pagesExamples">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link " {{--data-bs-toggle="collapse" aria-expanded="false"--}} href="{{aurl('orders/new')}}">
+                            <a class="nav-link {{url()->current() == url('/').'/admin/orders/new' ? 'active' :''}}" {{--data-bs-toggle="collapse" aria-expanded="false"--}} href="{{aurl('orders/new')}}">
                                 <span class="sidenav-mini-icon"> ط ج </span>
                                 <span class="sidenav-normal"> الطلبات الجديدة <b class="caret"></b></span>
                             </a>
@@ -127,7 +127,7 @@
             </li>
 
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#componentsExamples" class="nav-link " aria-controls="componentsExamples" role="button" aria-expanded="false">
+                <a data-bs-toggle="collapse" href="#componentsExamples" class="nav-link active_main_tap" aria-controls="componentsExamples" role="button" aria-expanded="false">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center ms-2">
                         <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>المندوبين</title>
@@ -154,10 +154,36 @@
                                 <span class="sidenav-normal"> كل المندوبين </span>
                             </a>
                         </li>
+
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#clientsExamples" class="nav-link active_main_tap" aria-controls="componentsExamples" role="button" aria-expanded="false">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center ms-2">
+                        <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>العملاء</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g transform="translate(1.000000, 0.000000)">
+                                            <path class="color-background" d="M45,0 L26,0 C25.447,0 25,0.447 25,1 L25,20 C25,20.379 25.214,20.725 25.553,20.895 C25.694,20.965 25.848,21 26,21 C26.212,21 26.424,20.933 26.6,20.8 L34.333,15 L45,15 C45.553,15 46,14.553 46,14 L46,1 C46,0.447 45.553,0 45,0 Z" opacity="0.59858631"></path>
+                                            <path class="color-foreground" d="M22.883,32.86 C20.761,32.012 17.324,31 13,31 C8.676,31 5.239,32.012 3.116,32.86 C1.224,33.619 0,35.438 0,37.494 L0,41 C0,41.553 0.447,42 1,42 L25,42 C25.553,42 26,41.553 26,41 L26,37.494 C26,35.438 24.776,33.619 22.883,32.86 Z"></path>
+                                            <path class="color-foreground" d="M13,28 C17.432,28 21,22.529 21,18 C21,13.589 17.411,10 13,10 C8.589,10 5,13.589 5,18 C5,22.529 8.568,28 13,28 Z"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="nav-link-text me-1">العملاء</span>
+                </a>
+                <div class="collapse " id="clientsExamples">
+                    <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link " href="{{aurl('drivers/new')}}" >
-                                <span class="sidenav-mini-icon"> م ج </span>
-                                <span class="sidenav-normal"> مندوب جديد </span>
+                            <a class="nav-link " href="{{aurl('clients/all')}}" >
+                                <span class="sidenav-mini-icon"> ع </span>
+                                <span class="sidenav-normal"> كل العملاء </span>
                             </a>
                         </li>
 
@@ -183,3 +209,12 @@
         </div>
     </div>
 </aside>
+
+@push('admin_js')
+    <script>
+        $(document).on('click','.active_main_tap',function () {
+            $('.active_main_tap').removeClass('active');
+            $(this).addClass('active');
+        })
+    </script>
+@endpush

@@ -20,6 +20,12 @@
                             <h6 class="mb-0">المندوبين</h6>
                             {{--                            <p class="text-sm mb-0 text-capitalize font-weight-bold">انضم</p>--}}
                         </div>
+                        <div  style="float:left;display: inline-block" class="col-6 ">
+                            <div id="add_record" class="icon icon-shape bg-gradient-primary shadow text-center w-auto p-2" style="float: left;cursor:pointer" data-bs-toggle="modal" data-bs-target="#addModal">
+                                <i class="fa fa-plus opacity-10 px-1" style="top:0;" aria-hidden="true"></i>
+                                <span class="opacity-10 text-white" aria-hidden="true">اضافة جديد</span>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -33,7 +39,7 @@
                                     <th class="text-center text-uppercase text-secondary text-s font-weight-bold opacity-100">#</th>
                                     <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-100">الصورة</th>
                                     <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-100">الاسم</th>
-                                    <th class="text-secondary text-xs opacity-100 " style="min-width: 35px;">تحكم</th>
+                                    <th class="text-center text-secondary text-xs opacity-100 " style="min-width: 35px;">تحكم</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -52,10 +58,10 @@
                                         </td>
                                         <td class="align-middle ">
                                             <div class="row">
-                                                <a    class=" col-6 details_element text-center" data_route="{{aurl('orders/order_details/'.$data->id)}}"  data-toggle="tooltip" data-placement="top" title="التفاصيل">
-                                                    <i class="fas fa-search "  style="color: #0982bf"  ></i>
+                                                <a    class=" col-6 details_element text-center editModal"   action="{{aurl('drivers/edit/'.$data->id)}}" data-toggle="tooltip" data-placement="top" title="تعديل">
+                                                    <i class="fas fa-edit "  style="color: #0982bf"  ></i>
                                                 </a>
-                                                <a    class=" col-6 delete_element text-center"  data_delete="{{aurl('drivers/delivery_delete')}}" data_id="{{$data->id}}" data-original-title="delete order" data-toggle="tooltip" data-placement="top" title="حذف">
+                                                <a    class=" col-6 delete_element text-center"  data_delete="{{aurl('drivers/driver_delete')}}" data_id="{{$data->id}}" data-original-title="delete order" data-toggle="tooltip" data-placement="top" title="حذف">
                                                     <i class="fa fa-trash "  style="color: #ce031b" ></i>
                                                 </a>
                                             </div>
@@ -77,38 +83,171 @@
         </div>
     </div>
 
-
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" style="z-index: 999999!important"
-         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-
-        <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
-        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-
-
+    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header d-flex justify-content-center">
-                    <h5 class="modal-title font-weight-bold" id="exampleModalLongTitle">تفاصيل الطلب</h5>
-
-                </div>
-                <div class="modal-body">
-
-
-
-                </div>
-                <div class="modal-footer text-center d-flex justify-content-center">
-                    <button type="button" class="btn " id="close_model" data-dismiss="modal">اغلاق</button>
-                </div>
+                @include('Web.CRUD.Drivers.creat')
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" id="edit_content">
+
+            </div>
+        </div>
+    </div>
+
 
 
 @endsection
 
 @push('admin_js')
 
-    {{--############  Control Booking  ##########--}}
+    {{--############  add_record  ##########--}}
 
+    <script>
+
+        $(document).on('submit','form#add_driver',function(e) {
+            e.preventDefault();
+            var myForm = $("#add_driver")[0]
+            var formData = new FormData(myForm)
+            var url = $('#add_driver').attr('action');
+            $('#add_driver')[0].reset();
+            $.ajax({
+                url:url,
+                type: 'POST',
+                data: formData,
+                success: function (data) {
+                    if (data.status === 200) {
+                        $('#addModal').modal('hide')
+
+                        Swal.fire({
+                            title: 'تم بنجاح!',
+                            text: 'تم اضافة المندوب بنجاح!',
+                            icon: 'success',
+                            confirmButtonText: 'حسنا',
+                        });
+                        setTimeout(function(){ location.reload()},2000);
+
+                    }
+
+                    if (data.status === 422) {
+                        $.each(data.message , function(index, value) {
+                            toastr.error(value);
+                        });
+                    }
+
+                },
+                error: function (data) {
+                    if (data.status === 500) {
+                        $('#addModal').modal('hide')
+                        Swal.fire({
+                            title: 'خطأ!',
+                            text: 'عذرا هناك خطأ!',
+                            icon: 'error',
+                            confirmButtonText: 'حسنا',
+                        })
+                    }
+
+                },//end error method
+
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+
+        {{--############  edit_content  ##########--}}
+        $(document).on('click','.editModal',function(e) {
+            e.preventDefault();
+            // var id = $(this).attr('delivery_id')
+            var url = $(this).attr('action');
+            // alert(url)
+            $('#add_driver')[0].reset();
+            $.ajax({
+                url:url,
+                type: 'GET',
+                // data: formData,
+                success: function (data) {
+                    $('#edit_content').html(data);
+                    $('#editModal').modal('show')
+                    $('.dropify').dropify();
+                },
+                error: function (data) {
+                    if (data.status === 500) {
+                        $('#editModal').modal('hide')
+                        Swal.fire({
+                            title: 'خطأ!',
+                            text: 'عذرا هناك خطأ!',
+                            icon: 'error',
+                            confirmButtonText: 'حسنا',
+                        })
+                    }
+
+                },//end error method
+
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+
+        {{--############  update_record  ##########--}}
+
+
+        $(document).on('submit','form#update_driver',function(e) {
+            e.preventDefault();
+            var myForm = $("#update_driver")[0]
+            var formData = new FormData(myForm)
+            var url = $('#update_driver').attr('action');
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: formData,
+                success: function (data) {
+                    if (data.status === 200) {
+                        $('#editModal').modal('hide')
+                        Swal.fire({
+                            title: 'تم بنجاح!',
+                            text: 'تم تعديل المندوب بنجاح!',
+                            icon: 'success',
+                            confirmButtonText: 'حسنا',
+                        });
+                        setTimeout(function () {
+                            location.reload()
+                        }, 2000);
+
+                    }
+
+                    if (data.status === 422) {
+                        $.each(data.message, function (index, value) {
+                            toastr.error(value);
+                        });
+                    }
+
+                },
+                error: function (data) {
+                    if (data.status === 500) {
+                        $('#editModal').modal('hide')
+                        Swal.fire({
+                            title: 'خطأ!',
+                            text: 'عذرا هناك خطأ!',
+                            icon: 'error',
+                            confirmButtonText: 'حسنا',
+                        })
+                    }
+
+                },//end error method
+
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+
+    </script>
 
 @endpush

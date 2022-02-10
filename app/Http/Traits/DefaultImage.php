@@ -76,7 +76,7 @@ trait DefaultImage{
             $fileNameToStore=$is_updated_file;
         }
 
-        return $fileNameToStore!=null?'/storage/uploads/'.$fileNameToStore:null;
+        return $fileNameToStore!=null?'storage/uploads/'.$fileNameToStore:null;
     }//end
 
 
