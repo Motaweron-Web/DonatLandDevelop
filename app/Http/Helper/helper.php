@@ -732,40 +732,51 @@ if (!function_exists('get_file')) {
 }
 
 if (!function_exists('fireBase')) {
-    function fireBase($user_id, $rev_id, $order_id, $message)
+//    function fireBase($user_id, $rev_id, $order_id, $message , )
+    function fireBase($user_id, $rev_id, $order_id, $message , $from_type = 'driver' , $to_type= 'customer' )
     {
+        if ($from_type=='driver') $from_user_id = $rev_id;
+        elseif ($from_type=='customer') $from_user_id = $user_id;
+        else $from_user_id = null;
+
+        if ($to_type=='driver') $to_user_id = $rev_id;
+        elseif ($to_type=='customer') $to_user_id = $user_id;
+
         $data = [
-            'user_id' => $user_id,
+            'from_user_type' => $from_type,
+            'to_user_type' => $to_type,
+            'from_user_id' =>  $from_user_id,
+            'to_user_id' => $to_user_id,
             'order_id' => $order_id,
-            'rev_id' => $rev_id,
             'title' => 'إشعار جديد',
-            'note' => $message,
+            'message' => $message,
+            'date' => strtotime(date('Y-m-d H:i:s')),
         ];
 
 
-//        $new = \App\Models\Notification::create($data);
+        $new = \App\Models\Notification::create($data);
         $url = 'https://fcm.googleapis.com/fcm/send';
         $representative_tokens = \App\Models\RepresentativeToken::where('rev_id', $rev_id)->pluck('token')->toArray();
-//        $user_tokens = \App\Models\UserToken::where('user_id', $user_id)->pluck('token')->toArray();
+        $user_tokens = \App\Models\PhoneToken::where('user_id', $user_id)->pluck('phone_token')->toArray();
 
 
-//        if($user_id != null) {
-////            $fields = array(
-////                'registration_ids' => $user_tokens,
-////                'title' => $data,
-////                'body' => $data
-////            );
-//        }
-//        else{
+        if($user_id != null) {
+            $fields = array(
+                'registration_ids' => $user_tokens,
+                'data' => $data['title'],
+                'notification' => $data['message']
+            );
+        }
+        else{
             $fields = array(
                 'registration_ids' => $representative_tokens,
-                'title' => $data,
-                'body' => $data
+                'data' => $data['title'],
+                'notification' => $data['message']
             );
-//        }
+        }
         $fields = json_encode($fields);
         $headers = array(
-            'Authorization: key=' . "AAAAAQl81dQ:APA91bHMDfE_s5pBeuRWvAWi4HM0Xg7G4JKaUVrEkMCDXyz4h4x1iYEu8rHe1DGi29zVqjX6hdIoVgWYPZxdZpABPPs2AYOZSp7b5Tn8O59fIMzmq9nWaMfSmE5o2vskKxuliSER7GFw",
+            'Authorization: key=' . "AAAAXWPBF04:APA91bGfESEoSN6biRuJJ5XwUlQGLjfZR8QE6WFfZeb0vxkcHKsNezGpqYNJsZAoLkVgJeD0jHZykofWQfG_z8JNXK6kBV3t1PQrYsOU96ojs4pKxgkfHUHF9M0Wu8_Yq9EsbQpYFzV-",
             'Content-Type: application/json'
         );
 

@@ -23,8 +23,8 @@ class HomeController extends Controller
     public function products(Request $request){
         $data = Products::where('is_sale',true)->where('is_active',true)->latest();
 
-        if ($request->has('category_id') && count($request->category_ids)){
-            $data->wherein('category_id',$request->category_id);
+        if ($request->has('category_ids') && count($request->category_ids)){
+            $data->wherein('category_id',$request->category_ids);
         }
 
         if ($request->has('search') && $request->search != ''){

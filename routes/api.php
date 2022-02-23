@@ -73,7 +73,8 @@ Route::group(['namespace' => 'Contact','prefix' => 'contact'],function (){
 });
 //================== notifications  ===============
 Route::group(['namespace' => 'Notification','prefix' => 'notification'],function (){
-    Route::get('notification','NotificationController@index')->name('contact');
+    Route::get('notification','NotificationController@index')->name('notification');
+    Route::get('driver_notification','NotificationController@driver_notification')->name('driver_notification');
 });
 
 

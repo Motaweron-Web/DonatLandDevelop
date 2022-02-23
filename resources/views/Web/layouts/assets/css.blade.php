@@ -11,6 +11,10 @@
 <link href="{{url('assets/css/nucleo-svg.css')}}" rel="stylesheet" />
 <!-- Font Awesome Icons -->
 <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300&display=swap" rel="stylesheet">
+
 <link href="{{url('assets/css/nucleo-svg.css')}}" rel="stylesheet" />
 <!-- CSS Files -->
 {{--<link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">--}}
@@ -26,7 +30,8 @@
     }
 
     * {
-        font-family: Sukar;
+        /*font-family: Sukar;*/
+        font-family: 'Almarai', sans-serif;
     }
 </style>
 @toastr_css
@@ -52,11 +57,15 @@
     div.swal2-actions button{
          margin: 10px!important;
      }
+    .swal2-container.swal2-rtl.swal2-center.swal2-backdrop-show {
+        z-index: 9999!important;
+    }
      /*button.swal2-confirm.btn.btn-success {*/
      /*    margin: 10px!important;*/
      /*}*/
 
 </style>
-
+@yield('admin_css')
 {{--================================  dropfy  ===================--}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css" integrity="sha512-In/+MILhf6UMDJU4ZhDL0R0fEpsp4D3Le23m6+ujDWXwl3whwpucJG1PEmI3B07nyJx+875ccs+yX2CqQJUxUw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+

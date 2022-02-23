@@ -13,7 +13,7 @@
                     <div class="row mb-3">
                         <div  style="float: right;display: inline-block" class="col-6">
                             <h6 class="mb-0">الطلبات الجديدة</h6>
-{{--                            <p class="text-sm mb-0 text-capitalize font-weight-bold">انضم</p>--}}
+                            {{--                            <p class="text-sm mb-0 text-capitalize font-weight-bold">انضم</p>--}}
                         </div>
                     </div>
 
@@ -38,84 +38,84 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($data as $order)
-                                        <tr>
-                                            <td>{{$loop->iteration}}</td>
-                                            <td>
-                                                @if($order->branch)
+                                @foreach($data as $order)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>
+                                            @if($order->branch)
                                                 <div class="d-flex px-2 py-1">
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <h6 class="mb-0 text-xs">{{$order->branch->name}}</h6>
                                                         <p class="text-xs text-secondary mb-0">{{$order->branch->email}}</p>
-                                                        <p class="text-xs text-secondary mb-0">{{$order->branch->phone}}</p>
+                                                        {{--                                                        <p class="text-xs text-secondary mb-0">{{$order->branch->phone}}</p>--}}
                                                     </div>
                                                 </div>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if($order->customer)
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($order->customer)
                                                 <p class="text-xs font-weight-bold mb-0">{{$order->customer->name}}</p>
                                                 <p class="text-xs text-secondary mb-0">{{$order->customer->email}}</p>
                                                 <p class="text-xs text-secondary mb-0">{{$order->customer->phone_number}}</p>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if($order->status=='append')
-                                                    <p class="badge badge-sm badge-success"> جديد </p>
-                                                @else
-                                                    <p class="badge badge-sm badge-secondary">
-                                                        تم الرفض
-                                                        @if($order->delivery)
-                                                            بواسطة  {{ $order->delivery->name }}
-                                                        @endif
-                                                    </p>
-                                                @endif
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <span class="text-secondary text-xs font-weight-bold">{{$order->grand_total}}</span>
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($order->status=='append')
+                                                <p class="badge badge-sm badge-success"> جديد </p>
+                                            @else
+                                                <p class="badge badge-sm badge-secondary">
+                                                    تم الرفض
+                                                    @if($order->delivery)
+                                                        بواسطة  {{ $order->delivery->name }}
+                                                    @endif
+                                                </p>
+                                            @endif
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="text-secondary text-xs font-weight-bold">{{$order->grand_total}}</span>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
                                                 <span class="text-secondary text-xs font-weight-bold">
                                                     @if($order->payment_type == 'cash') كاش
                                                     @elseif($order->payment_type == 'wallet') محفظة
                                                     @else دفع الكترونى
                                                     @endif
                                                 </span>
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
                                                 <span class="text-secondary text-xs font-weight-bold">
                                                     @if($order->receive_type == 'branch') الفرع
                                                     @else  توصيل دليفرى
                                                     @endif
                                                 </span>
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
                                                 <span class="text-secondary text-xs font-weight-bold">
                                                   {{$order->notes}}
                                                 </span>
-                                            </td>
-                                            <td class="align-middle text-center">
+                                        </td>
+                                        <td class="align-middle text-center">
                                                 <span class="text-secondary text-xs font-weight-bold ">
                                                     <a target="_blank" href="http://www.google.com/maps/place/{{$order->latitude}},{{$order->longitude}}" >الذهاب للعنوان</a>
                                                 </span>
-                                            </td>
-                                            <td class="align-middle ">
-                                                <div class="row">
-                                                    <a    class=" col-4 accept_element"  data_route="{{aurl('orders/order_accept/'.$order->id)}}" is_delivary="{{$order->is_delivary}}" data-toggle="tooltip"  data-placement="top"  title="قبول">
-{{--                                                        <input type="hidden" name="is_delivary" value="{{$order->is_delivary}}">--}}
-                                                        <i class="fa fa-check "  style="color: #122bce"  ></i>
-                                                    </a>
-                                                    <a    class=" col-4 refuse_element" data_route="{{aurl('orders/order_refuse/'.$order->id)}}"  data-toggle="tooltip" data-placement="top" title="رفض">
-                                                        <i class="fa fa-times "  style="color: #969794"  ></i>
-                                                    </a>
-                                                    <a    class=" col-4 delete_element"  data_delete="{{aurl('orders/order_delete')}}" data_id="{{$order->id}}" data-original-title="delete order" data-toggle="tooltip" data-placement="top" title="حذف">
-                                                        <i class="fa fa-trash "  style="color: #ce031b" ></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        </td>
+                                        <td class="align-middle ">
+                                            <div class="row">
+                                                <a    class=" col-4 accept_element cursor-pointer"  data_route="{{aurl('orders/order_accept/'.$order->id)}}" is_delivary="{{$order->is_delivary}}" data-toggle="tooltip"  data-placement="top"  title="قبول">
+                                                    {{--                                                        <input type="hidden" name="is_delivary" value="{{$order->is_delivary}}">--}}
+                                                    <i class="fa fa-check "  style="color: #122bce"  ></i>
+                                                </a>
+                                                <a    class=" col-4 refuse_element cursor-pointer" data_route="{{aurl('orders/order_refuse/'.$order->id)}}"  data-toggle="tooltip" data-placement="top" title="رفض">
+                                                    <i class="fa fa-times "  style="color: #969794"  ></i>
+                                                </a>
+                                                <a    class=" col-4 delete_element cursor-pointer"  data_delete="{{aurl('orders/order_delete')}}" data_id="{{$order->id}}" data-original-title="delete order" data-toggle="tooltip" data-placement="top" title="حذف">
+                                                    <i class="fa fa-trash "  style="color: #ce031b" ></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
 
-                                    @endforeach
+                                @endforeach
 
 
 
@@ -161,7 +161,7 @@
                         icon: 'warning',
                         confirmButtonText: 'حسنا',
                     })
-                return false;
+                    return false;
                 }
 
                 swalWithBootstrapButtons.fire({

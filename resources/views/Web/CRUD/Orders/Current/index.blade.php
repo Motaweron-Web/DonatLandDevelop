@@ -48,7 +48,7 @@
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <h6 class="mb-0 text-xs">{{$order->branch->name}}</h6>
                                                         <p class="text-xs text-secondary mb-0">{{$order->branch->email}}</p>
-                                                        <p class="text-xs text-secondary mb-0">{{$order->branch->phone}}</p>
+{{--                                                        <p class="text-xs text-secondary mb-0">{{$order->branch->phone}}</p>--}}
                                                     </div>
                                                 </div>
                                             @endif
@@ -63,7 +63,7 @@
                                         <td class="align-middle text-center text-sm">
                                             @if($order->delivery)
                                                 <p class="text-xs font-weight-bold mb-0">{{$order->delivery->name}}</p>
-                                                <p class="text-xs text-secondary mb-0">{{$order->customer->phone}}</p>
+                                                <p class="text-xs text-secondary mb-0">{{$order->delivery->phone}}</p>
                                             @else
                                                 <p class="text-xs font-weight-bold mb-0">لا يوجد توصيل </p>
                                             @endif
@@ -111,18 +111,20 @@
                                                     <a target="_blank" href="http://www.google.com/maps/place/{{$order->latitude}},{{$order->longitude}}" >الذهاب للعنوان</a>
                                                 </span>
                                         </td>
-                                        <td class="align-middle ">
-                                            <div class="row">
-                                                <a    class=" col-3 end_element"  data_route="{{aurl('orders/order_end/'.$order->id)}}"  data-toggle="tooltip"  data-placement="top"  title="انهاء">
-                                                    <i class="fa fa-check-double "  style="color: #00a500"  ></i>
-                                                </a>
-                                                <a    class=" col-3 refuse_element" data_route="{{aurl('orders/order_refuse/'.$order->id)}}"  data-toggle="tooltip" data-placement="top" title="رفض">
+                                        <td class="align-left text-left ">
+                                            <div class="row ">
+                                                @if($order->is_delivary == 'no')
+                                                    <a    class=" col-3 end_element cursor-pointer"  data_route="{{aurl('orders/order_end/'.$order->id)}}"  data-toggle="tooltip"  data-placement="top"  title="انهاء">
+                                                        <i class="fa fa-check-double "  style="color: #00a500"  ></i>
+                                                    </a>
+                                                @endif
+                                                <a    class=" col-{{$order->is_delivary == 'no'?'3':'4'}} refuse_element cursor-pointer" data_route="{{aurl('orders/order_refuse/'.$order->id)}}"  data-toggle="tooltip" data-placement="top" title="رفض">
                                                     <i class="fa fa-times "  style="color: #969794"  ></i>
                                                 </a>
-                                                <a    class=" col-3 details_element" data_route="{{aurl('orders/order_details/'.$order->id)}}"  data-toggle="tooltip" data-placement="top" title="التفاصيل">
+                                                <a    class=" col-{{$order->is_delivary == 'no'?'3':'4'}} details_element cursor-pointer" data_route="{{aurl('orders/order_details/'.$order->id)}}"  data-toggle="tooltip" data-placement="top" title="التفاصيل">
                                                     <i class="fas fa-search "  style="color: #0982bf"  ></i>
                                                 </a>
-                                                <a    class=" col-3 delete_element"  data_delete="{{aurl('orders/order_delete')}}" data_id="{{$order->id}}" data-original-title="delete order" data-toggle="tooltip" data-placement="top" title="حذف">
+                                                <a    class=" col-{{$order->is_delivary == 'no'?'3':'4'}} delete_element cursor-pointer"  data_delete="{{aurl('orders/order_delete')}}" data_id="{{$order->id}}" data-original-title="delete order" data-toggle="tooltip" data-placement="top" title="حذف">
                                                     <i class="fa fa-trash "  style="color: #ce031b" ></i>
                                                 </a>
                                             </div>

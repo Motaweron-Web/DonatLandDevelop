@@ -45,7 +45,7 @@
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <h6 class="mb-0 text-xs">{{$order->branch->name}}</h6>
                                                         <p class="text-xs text-secondary mb-0">{{$order->branch->email}}</p>
-                                                        <p class="text-xs text-secondary mb-0">{{$order->branch->phone}}</p>
+                                                        {{--                                                        <p class="text-xs text-secondary mb-0">{{$order->branch->phone}}</p>--}}
                                                     </div>
                                                 </div>
                                             @endif
@@ -60,17 +60,17 @@
                                         <td class="align-middle text-center text-sm">
                                             @if($order->delivery)
                                                 <p class="text-xs font-weight-bold mb-0">{{$order->delivery->name}}</p>
-                                                <p class="text-xs text-secondary mb-0">{{$order->customer->phone}}</p>
+                                                <p class="text-xs text-secondary mb-0">{{$order->delivery->phone}}</p>
                                             @else
                                                 <p class="text-xs font-weight-bold mb-0">لا يوجد توصيل </p>
                                             @endif
                                         </td>
                                         <td>
-                                                @if($order->status=='cancel')
-                                                    <p class="badge badge-sm badge-secondary">ملغى</p>
-                                                @else
-                                                    <p class="badge badge-sm badge-success"> منتهى </p>
-                                                @endif
+                                            @if($order->status=='cancel')
+                                                <p class="badge badge-sm badge-secondary">ملغى</p>
+                                            @else
+                                                <p class="badge badge-sm badge-success"> منتهى </p>
+                                            @endif
                                         </td>
                                         <td class="align-middle text-center text-sm">
                                             <span class="text-secondary text-xs font-weight-bold">{{$order->grand_total}}</span>
@@ -102,10 +102,10 @@
                                         </td>
                                         <td class="align-middle ">
                                             <div class="row">
-                                                <a    class=" col-6 details_element" data_route="{{aurl('orders/order_details/'.$order->id)}}"  data-toggle="tooltip" data-placement="top" title="التفاصيل">
+                                                <a    class=" col-6 details_element cursor-pointer" data_route="{{aurl('orders/order_details/'.$order->id)}}"  data-toggle="tooltip" data-placement="top" title="التفاصيل">
                                                     <i class="fas fa-search "  style="color: #0982bf"  ></i>
                                                 </a>
-                                                <a    class=" col-6 delete_element"  data_delete="{{aurl('orders/order_delete')}}" data_id="{{$order->id}}" data-original-title="delete order" data-toggle="tooltip" data-placement="top" title="حذف">
+                                                <a    class=" col-6 delete_element cursor-pointer"  data_delete="{{aurl('orders/order_delete')}}" data_id="{{$order->id}}" data-original-title="delete order" data-toggle="tooltip" data-placement="top" title="حذف">
                                                     <i class="fa fa-trash "  style="color: #ce031b" ></i>
                                                 </a>
                                             </div>

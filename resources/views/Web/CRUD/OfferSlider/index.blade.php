@@ -1,19 +1,24 @@
 @extends('Web.layouts.inc.app')
 @section('title1')
-    المشرفين
+    سلايدر الفروع
 @endsection
 {{--@section('title2')--}}
-{{--     عرض المشرفين--}}
+{{--     عرض سلايدر الفروع--}}
 {{--@endsection--}}
 @section('content')
+    <style>
+        img:hover{
+            transform: scale(3)
+        }
+    </style>
     <div class="row">
     <div class=" col-12">
         <div class="card">
             <div class="card-header p-3 pb-0">
                 <div class="row mb-3">
                     <div  style="float: right;display: inline-block" class="col-6">
-                        <h6 class="mb-0">المشرفين</h6>
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold">انضم</p>
+                        <h6 class="mb-0">سلايدر الفروع</h6>
+{{--                        <p class="text-sm mb-0 text-capitalize font-weight-bold">انضم</p>--}}
                     </div>
                     <div  style="float:left;display: inline-block" class="col-6 ">
                         <div id="add_record" class="icon icon-shape bg-gradient-primary shadow text-center w-auto p-2" style="float: left;cursor:pointer" data-bs-toggle="modal" data-bs-target="#addModal">
@@ -32,44 +37,27 @@
                             <thead>
                             <tr>
                                 <th class="text-center text-uppercase text-secondary text-s font-weight-bold opacity-100">#</th>
-                                <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-100">الاسم</th>
-                                <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-100">اسم الشركة</th>
-                                <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-100">رقم الهاتف</th>
-                                <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-100">البريد الالكترونى</th>
+                                <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-100">الصورة</th>
                                 <th class="text-center text-secondary text-xs opacity-100 " style="min-width: 35px;">تحكم</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($users as $data)
                                 <tr>
-                                    <td class="align-middle text-center">{{$loop->iteration}}</td>
+                                    <td class="align-middle text-center ">{{$loop->iteration}}</td>
 
                                     <td class="align-middle text-center text-sm">
-                                            <span class="text-secondary text-xs font-weight-bold">
-                                              {{$data->name}}
-                                            </span>
+                                        <div>
+                                            <img src="{{get_file($data->image)}}" alt="delivery image" onclick="window.open(this.src)" class="avatar avatar-md me-3">
+                                        </div>
                                     </td>
-                                    <td class="align-middle text-center text-sm">
-                                            <span class="text-secondary text-xs font-weight-bold">
-                                              {{$data->company_name}}
-                                            </span>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                            <span class="text-secondary text-xs font-weight-bold">
-                                              {{$data->phone}}
-                                            </span>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                            <span class="text-secondary text-xs font-weight-bold">
-                                              {{$data->email}}
-                                            </span>
-                                    </td>
+
                                     <td class="align-middle ">
                                         <div class="row">
-                                            <a    class=" col-6 details_element text-center editModal cursor-pointer"   action="{{aurl('admins/edit/'.$data->id)}}" data-toggle="tooltip" data-placement="top" title="تعديل">
+                                            <a    class=" col-6 details_element text-center editModal cursor-pointer"   action="{{aurl('offerSlider/edit/'.$data->id)}}" data-toggle="tooltip" data-placement="top" title="تعديل">
                                                 <i class="fas fa-edit "  style="color: #0982bf"  ></i>
                                             </a>
-                                            <a    class=" col-6 delete_element text-center cursor-pointer"  data_delete="{{aurl('admins/admin_delete')}}" data_id="{{$data->id}}" data-original-title="delete order" data-toggle="tooltip" data-placement="top" title="حذف">
+                                            <a    class=" col-6 delete_element text-center cursor-pointer"  data_delete="{{aurl('offerSlider/offerSlider_delete')}}" data_id="{{$data->id}}" data-original-title="delete order" data-toggle="tooltip" data-placement="top" title="حذف">
                                                 <i class="fa fa-trash "  style="color: #ce031b" ></i>
                                             </a>
                                         </div>
@@ -139,7 +127,7 @@
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                @include('Web\Users\Admins\creat')
+                @include('Web.CRUD.OfferSlider.creat')
             </div>
         </div>
     </div>
@@ -161,12 +149,12 @@
 
     <script>
 
-        $(document).on('submit','form#add_admin',function(e) {
+        $(document).on('submit','form#add_offerSlider',function(e) {
             e.preventDefault();
-            var myForm = $("#add_admin")[0]
+            var myForm = $("#add_offerSlider")[0]
             var formData = new FormData(myForm)
-            var url = $('#add_admin').attr('action');
-            // $('#add_admin')[0].reset();
+            var url = $('#add_offerSlider').attr('action');
+            $('#add_offerSlider')[0].reset();
             $.ajax({
                 url:url,
                 type: 'POST',
@@ -217,7 +205,7 @@
             // var id = $(this).attr('delivery_id')
             var url = $(this).attr('action');
             // alert(url)
-            $('#add_admin')[0].reset();
+            $('#add_offerSlider')[0].reset();
             $.ajax({
                 url:url,
                 type: 'GET',
@@ -249,11 +237,11 @@
         {{--############  update_record  ##########--}}
 
 
-        $(document).on('submit','form#update_admin',function(e) {
+        $(document).on('submit','form#update_offerSlider',function(e) {
             e.preventDefault();
-            var myForm = $("#update_admin")[0]
+            var myForm = $("#update_offerSlider")[0]
             var formData = new FormData(myForm)
-            var url = $('#update_admin').attr('action');
+            var url = $('#update_offerSlider').attr('action');
             $.ajax({
                 url: url,
                 type: 'POST',

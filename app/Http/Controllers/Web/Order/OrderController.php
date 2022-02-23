@@ -50,6 +50,10 @@ class OrderController extends Controller
         $order->save();
 //        return $order;
 //        toastr()->info('تم قبول الحجز');
+        fireBase($order['customer_id'] , null , $order['id'] , 'تم قبول طلبك بواسطة ادارة دونات لاند ' ,'admin' );
+        if ($order->delivery_id != null)
+            fireBase(null , $order['delivery_id'] , $order['id'] , 'لديك طلب جديد  ' ,'admin' ,'driver');
+
         return redirect()->back();
     }//end fun
 
@@ -59,6 +63,8 @@ class OrderController extends Controller
         $order = Order::where('id',$id)->first();
         $order->status = 'cancel';
         $order->save();
+        fireBase($order['customer_id'] , null , $order['id'] , 'تم رفض طلبك بواسطة ادارة دونات لاند ' ,'admin' );
+
         return redirect()->back();
     }//end fun
 
@@ -68,6 +74,7 @@ class OrderController extends Controller
         $order = Order::where('id',$id)->first();
         $order->status = 'end';
         $order->save();
+        fireBase($order['customer_id'] , null , $order['id'] , 'تم انهاء طلبك بواسطة ادارة دونات لاند ' ,'admin' );
 //        return $order;
         return redirect()->back();
     }//end fun

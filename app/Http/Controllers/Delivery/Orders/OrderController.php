@@ -55,7 +55,7 @@ class OrderController extends Controller
             }
             $data['delivery_status'] = 'accepted';
             $data->save();
-            fireBase($data['customer_id'] , null , $data['id'] , ' باستلام طلبك'.delivery()->user()->id.'قام ');
+            fireBase($data['customer_id'] , null , $data['id'] , ' قام ' .delivery()->user()->name. ' باستلام طلبك   ');
             return $this->returnData('data', $data, 'تم قبول الطلب بنجاح');
     }
 //============================================================================
@@ -72,7 +72,7 @@ class OrderController extends Controller
         }
         $data['delivery_status'] = 'on_way';
         $data->save();
-        fireBase($data['customer_id'] , null , $data['id'] , delivery()->user()->id.'طلبك قيد التوصيل بواسطة المندوب ');
+        fireBase($data['customer_id'] , null , $data['id'] , ' طلبك قيد التوصيل بواسطة المندوب ' . delivery()->user()->name);
         return $this->returnData('data', $data, 'جارى توصيل الطلب بنجاح');
     }
 
@@ -119,7 +119,7 @@ class OrderController extends Controller
 //                    $user->grand_total -= $data['total'];
                     $user->save();
                 }
-                fireBase($data['customer_id'] , null , $data['id'] , delivery()->user()->id.'تم انهاء طلبك بواسطة المندوب ');
+                fireBase($data['customer_id'] , null , $data['id'] , ' تم انهاء طلبك بواسطة المندوب ' . delivery()->user()->name);
 //                fireBase($data->user_id , null , $data->id , 'تم انهاء الطلب بنجاح شكرا لاستخدامك تطبيق أكابر');
                 return $this->returnData('data', $data, 'تم انهاء الطلب بنجاح');
             }
@@ -141,6 +141,7 @@ class OrderController extends Controller
 //            $data->status = 'cancel';
             $data->delivery_status = 'rejected';
             $data->save();
+            fireBase($data['customer_id'] , null , $data['id'] , ' سيتم تعيين مندوب اخر للطلب ');
             return $this->returnData('data', $data, 'تم الغاء الطلب بنجاح');
         }
         else{

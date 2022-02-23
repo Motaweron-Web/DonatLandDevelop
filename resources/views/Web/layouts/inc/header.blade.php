@@ -27,8 +27,13 @@
             <ul class="navbar-nav ms-0 justify-content-end">
                 <li class="nav-item d-flex align-items-center">
                     <a href="{{route('logout')}}" class="nav-link text-body font-weight-bold px-0">
-                        <i class="fa fa-user ms-sm-1 "></i>
+                        <i class="fas fa-power-off ms-sm-1 "></i>
                         <span class="d-sm-inline d-none">تسجيل الخروج</span>
+                    </a>
+                </li>
+                <li class="nav-item px-3 d-flex align-items-center">
+                    <a href="{{route('profile')}}" class="nav-link text-body p-0">
+                        <i class="fa fa-user  cursor-pointer"></i>
                     </a>
                 </li>
 {{--                <li class="nav-item d-xl-none pe-3 d-flex align-items-center">--}}

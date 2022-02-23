@@ -58,10 +58,10 @@
                                         </td>
                                         <td class="align-middle ">
                                             <div class="row">
-                                                <a    class=" col-6 details_element text-center editModal"   action="{{aurl('drivers/edit/'.$data->id)}}" data-toggle="tooltip" data-placement="top" title="تعديل">
+                                                <a    class=" col-6 details_element text-center editModal cursor-pointer"   action="{{aurl('drivers/edit/'.$data->id)}}" data-toggle="tooltip" data-placement="top" title="تعديل">
                                                     <i class="fas fa-edit "  style="color: #0982bf"  ></i>
                                                 </a>
-                                                <a    class=" col-6 delete_element text-center"  data_delete="{{aurl('drivers/driver_delete')}}" data_id="{{$data->id}}" data-original-title="delete order" data-toggle="tooltip" data-placement="top" title="حذف">
+                                                <a    class=" col-6 delete_element text-center cursor-pointer"  data_delete="{{aurl('drivers/driver_delete')}}" data_id="{{$data->id}}" data-original-title="delete order" data-toggle="tooltip" data-placement="top" title="حذف">
                                                     <i class="fa fa-trash "  style="color: #ce031b" ></i>
                                                 </a>
                                             </div>

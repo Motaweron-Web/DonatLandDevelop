@@ -72,9 +72,12 @@ class AuthController extends Controller
 
         if ($request->register_by != null) {
             $user = Customers::where('code', $request->register_by)->first();
-            $user->share_gifts += GeneralSetting::first()->register_gift;
-//            $user->total += Setting::first()->share_price;
-            $user->save();
+            if ($user){
+                $user->share_gifts += GeneralSetting::first()->register_gift;
+    //            $user->total += Setting::first()->share_price;
+                $user->save();
+            }
+
         }
 
 
