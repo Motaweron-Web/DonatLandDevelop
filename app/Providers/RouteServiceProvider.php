@@ -30,6 +30,7 @@ class RouteServiceProvider extends ServiceProvider
      protected $AdminNamespace = 'App\\Http\\Controllers\Admin';
      protected $ApiNamespace = 'App\\Http\\Controllers\Api';
      protected $DeliveryNamespace = 'App\\Http\\Controllers\Delivery';
+     protected $BranchNamespace = 'App\\Http\\Controllers\Branch';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -49,6 +50,10 @@ class RouteServiceProvider extends ServiceProvider
                     ->middleware('api')
                     ->namespace($this->DeliveryNamespace)
                     ->group(base_path('routes/delivery.php'));
+            Route::prefix('branch')
+                    ->middleware('api')
+                    ->namespace($this->BranchNamespace)
+                    ->group(base_path('routes/branch.php'));
 
             Route::middleware('web')
                 ->prefix('admin')

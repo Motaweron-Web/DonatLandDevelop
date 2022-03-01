@@ -62,8 +62,7 @@
                                             <p class="mb-0 text-secondary">
                                                 Copyright © <script>
                                                     document.write(new Date().getFullYear())
-                                                </script>
-{{--                                                Soft by {{$setting->developed_by}}.--}}
+                                                </script> Soft by {{$setting->developed_by}}.
                                             </p>
                                         </div>
                                     </div>
@@ -75,7 +74,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
-                                <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('{{url('assets/img/login_banner.jpg')}}')"></div>
+                                <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('{{url('assets/img/curved-images/curved9.jpg')}}')"></div>
                             </div>
                         </div>
                     </div>
@@ -110,8 +109,7 @@
                     if (data == 200){
                         toastr.success('تم تسجيل الدخول');
                         window.setTimeout(function() {
-                            // window.location.href= 'admin/';
-                            window.location.reload();
+                            window.location.href='admin';
                         }, 1000);
                     }else {
                         toastr.error('كلمة المرور خاطئة');

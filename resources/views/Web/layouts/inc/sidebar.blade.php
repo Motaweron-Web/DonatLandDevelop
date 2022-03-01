@@ -1,4 +1,3 @@
-<?php //use Illuminate\Http\Request; ?>
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret" id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute start-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
@@ -11,7 +10,7 @@
     <div class="collapse navbar-collapse px-0 w-auto h-auto h-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link {{Route::is('/') ? 'active' :''}}  {{--{{ request()->is('admin/*') || checkActive(url('admin')) ? 'active' : '' }}--}}" href="{{url('admin')}}" >
+                <a class="nav-link {{ request()->is('admin/*') || checkActive(url('admin')) ? 'active' : '' }}" href="{{url('admin')}}" >
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center ms-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>shop </title>
@@ -32,10 +31,10 @@
 
             </li>
             <li class="nav-item mt-3">
-                <h6 class="ps-4 me-4 text-uppercase text-xs font-weight-bolder opacity-6">الادارات الرئيسية</h6>
+                <h6 class="ps-4 me-4 text-uppercase text-xs font-weight-bolder opacity-6">PAGES</h6>
             </li>
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link active_main_tap {{Route::is('orders.*') ? 'active' :'collapsed'}}" aria-controls="pagesExamples" role="button" aria-expanded="{{Route::is('orders.*')? 'true' :'false'}}">
+                <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link active" aria-controls="pagesExamples" role="button" aria-expanded="false">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center ms-2">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>office</title>
@@ -51,179 +50,603 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text me-1">الطلبات</span>
+                    <span class="nav-link-text me-1">Pages</span>
                 </a>
-                <div class="collapse {{Route::is('orders.*') ? 'show' :''}}" id="pagesExamples">
+                <div class="collapse  show " id="pagesExamples">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link {{Route::is('orders.new') ? 'active' :''}}" {{--data-bs-toggle="collapse" aria-expanded="false"--}} href="{{aurl('orders/new')}}">
-                                <span class="sidenav-mini-icon"> ط ج </span>
-                                <span class="sidenav-normal"> الطلبات الجديدة <b class="caret"></b></span>
+                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#profileExample">
+                                <span class="sidenav-mini-icon"> P </span>
+                                <span class="sidenav-normal"> Profile <b class="caret"></b></span>
                             </a>
-{{--                            <div class="collapse " id="profileExample">--}}
-{{--                                <ul class="nav nav-sm flex-column">--}}
-{{--                                    <li class="nav-item">--}}
-{{--                                        <a class="nav-link " href="../../pages/pages/profile/overview.html">--}}
-{{--                                            <span class="sidenav-mini-icon text-xs"> P </span>--}}
-{{--                                            <span class="sidenav-normal"> Profile Overview </span>--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
-{{--                                    <li class="nav-item">--}}
-{{--                                        <a class="nav-link " href="../../pages/pages/profile/teams.html">--}}
-{{--                                            <span class="sidenav-mini-icon text-xs"> T </span>--}}
-{{--                                            <span class="sidenav-normal"> Teams </span>--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
-{{--                                    <li class="nav-item">--}}
-{{--                                        <a class="nav-link " href="../../pages/pages/profile/projects.html">--}}
-{{--                                            <span class="sidenav-mini-icon text-xs"> A </span>--}}
-{{--                                            <span class="sidenav-normal"> All Projects </span>--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
-{{--                                </ul>--}}
-{{--                            </div>--}}
+                            <div class="collapse " id="profileExample">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/pages/profile/overview.html">
+                                            <span class="sidenav-mini-icon text-xs"> P </span>
+                                            <span class="sidenav-normal"> Profile Overview </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/pages/profile/teams.html">
+                                            <span class="sidenav-mini-icon text-xs"> T </span>
+                                            <span class="sidenav-normal"> Teams </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/pages/profile/projects.html">
+                                            <span class="sidenav-mini-icon text-xs"> A </span>
+                                            <span class="sidenav-normal"> All Projects </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link {{Route::is('orders.current') ? 'active' :''}}" href="{{aurl('orders/current')}}">
-                                <span class="sidenav-mini-icon"> ط ح </span>
-                                <span class="sidenav-normal"> الطلبات الحالية <b class="caret"></b></span>
+                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#usersExample">
+                                <span class="sidenav-mini-icon"> U </span>
+                                <span class="sidenav-normal"> Users <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse " id="usersExample">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/pages/users/reports.html">
+                                            <span class="sidenav-mini-icon text-xs"> R </span>
+                                            <span class="sidenav-normal"> Reports </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/pages/users/new-user.html">
+                                            <span class="sidenav-mini-icon text-xs"> N </span>
+                                            <span class="sidenav-normal"> New User </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#accountExample">
+                                <span class="sidenav-mini-icon"> A </span>
+                                <span class="sidenav-normal"> Account <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse " id="accountExample">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/pages/account/settings.html">
+                                            <span class="sidenav-mini-icon text-xs"> S </span>
+                                            <span class="sidenav-normal"> Settings </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/pages/account/billing.html">
+                                            <span class="sidenav-mini-icon text-xs"> B </span>
+                                            <span class="sidenav-normal"> Billing </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/pages/account/invoice.html">
+                                            <span class="sidenav-mini-icon text-xs"> I </span>
+                                            <span class="sidenav-normal"> Invoice </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/pages/account/security.html">
+                                            <span class="sidenav-mini-icon text-xs"> S </span>
+                                            <span class="sidenav-normal"> Security </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#projectsExample">
+                                <span class="sidenav-mini-icon"> P </span>
+                                <span class="sidenav-normal"> Projects <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse " id="projectsExample">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/pages/projects/general.html">
+                                            <span class="sidenav-mini-icon text-xs"> G </span>
+                                            <span class="sidenav-normal"> General </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/pages/projects/timeline.html">
+                                            <span class="sidenav-mini-icon text-xs"> T </span>
+                                            <span class="sidenav-normal"> Timeline </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/pages/projects/new-project.html">
+                                            <span class="sidenav-mini-icon text-xs"> N </span>
+                                            <span class="sidenav-normal"> New Project </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="../../pages/pages/pricing-page.html">
+                                <span class="sidenav-mini-icon"> P </span>
+                                <span class="sidenav-normal"> Pricing Page </span>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link {{Route::is('orders.previous') ? 'active' :''}}" href="{{aurl('orders/previous')}}">
-                                <span class="sidenav-mini-icon"> ط ح </span>
-                                <span class="sidenav-normal"> الطلبات المنتهية <b class="caret"></b></span>
+                            <a class="nav-link " href="../../pages/pages/messages.html">
+                                <span class="sidenav-mini-icon"> M </span>
+                                <span class="sidenav-normal"> Messages </span>
                             </a>
                         </li>
-{{--                        <li class="nav-item ">--}}
-{{--                            <a class="nav-link " --}}{{--data-bs-toggle="collapse" aria-expanded="false"--}}{{-- href="#profileExample">--}}
-{{--                                <span class="sidenav-mini-icon"> م </span>--}}
-{{--                                <span class="sidenav-normal"> المستخدمين <b class="caret"></b></span>--}}
-{{--                            </a>--}}
-{{--                            <div class="collapse " id="profileExample">--}}
-{{--                                <ul class="nav nav-sm flex-column">--}}
-{{--                                    <li class="nav-item">--}}
-{{--                                        <a class="nav-link " href="../../pages/pages/profile/overview.html">--}}
-{{--                                            <span class="sidenav-mini-icon text-xs"> P </span>--}}
-{{--                                            <span class="sidenav-normal"> Profile Overview </span>--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
-{{--                                    <li class="nav-item">--}}
-{{--                                        <a class="nav-link " href="../../pages/pages/profile/teams.html">--}}
-{{--                                            <span class="sidenav-mini-icon text-xs"> T </span>--}}
-{{--                                            <span class="sidenav-normal"> Teams </span>--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
-{{--                                    <li class="nav-item">--}}
-{{--                                        <a class="nav-link " href="../../pages/pages/profile/projects.html">--}}
-{{--                                            <span class="sidenav-mini-icon text-xs"> A </span>--}}
-{{--                                            <span class="sidenav-normal"> All Projects </span>--}}
-{{--                                        </a>--}}
-{{--                                    </li>--}}
-{{--                                </ul>--}}
-{{--                            </div>--}}
-{{--                        </li>--}}
+                        <li class="nav-item active">
+                            <a class="nav-link active" href="../../pages/pages/rtl-page.html">
+                                <span class="sidenav-mini-icon"> R </span>
+                                <span class="sidenav-normal"> RTL </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="../../pages/pages/widgets.html">
+                                <span class="sidenav-mini-icon"> W </span>
+                                <span class="sidenav-normal"> Widgets </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="../../pages/pages/charts.html">
+                                <span class="sidenav-mini-icon"> C </span>
+                                <span class="sidenav-normal"> Charts </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="../../pages/pages/sweet-alerts.html">
+                                <span class="sidenav-mini-icon"> S </span>
+                                <span class="sidenav-normal"> Sweet Alerts </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="../../pages/pages/notifications.html">
+                                <span class="sidenav-mini-icon"> N </span>
+                                <span class="sidenav-normal"> Notifications </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
-
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#componentsExamples" class="nav-link active_main_tap {{Route::is('drivers.*')? 'active' :'collapsed'}}" aria-controls="componentsExamples" role="button" aria-expanded="{{Route::is('/drivers/*')? 'true' :'false'}}">
+                <a data-bs-toggle="collapse" href="#applicationsExamples" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center ms-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                             xmlns:svgjs="http://svgjs.com/svgjs" width="12px" height="12px"  x="0" y="0"
-                             viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
-                            <title>المندوبين</title>
-                            <g>
-                                <g xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="m356.261 512c-.864-2.862-1.454-5.757-2.571-8.584-15.952-40.342-54.301-66.416-97.69-66.416-7.383 0-14.573.802-21.53 2.26l72.74 72.74z"
-                                        fill="#000000" class="color-background" data-original="#000000"></path>
-                                    <path
-                                        d="m155.896 512h108.893l-60.707-60.707c-23.04 13.246-40.385 34.788-48.186 60.707z"
-                                        fill="#000000" class="color-background" data-original="#000000"></path>
-                                    <path
-                                        d="m387.477 512h63.523v-75c0-41.353-33.647-75-75-75h-218.789l53.41 53.41c14.249-5.129 29.385-8.41 45.379-8.41 55.781 0 105.073 33.516 125.581 85.386 2.549 6.445 4.384 13.011 5.896 19.614z"
-                                        fill="#000000" class="color-background" data-original="#000000"></path>
-                                    <path
-                                        d="m182.064 429.275-64.658-64.658c-32.335 8.329-56.406 37.485-56.406 72.383v75h63.625c7.872-34.437 28.788-63.871 57.439-82.725z"
-                                        fill="#000000" class="color-background" data-original="#000000"></path>
-                                    <path
-                                        d="m391 90c0-50.464-59.297-90-135-90s-135 39.536-135 90c0 11.867 3.442 21.63 8.661 30h252.678c5.219-8.37 8.661-18.133 8.661-30z"
-                                        fill="#000000" class="color-background" data-original="#000000"></path>
-                                    <path
-                                        d="m151 198.788v26.212c0 57.891 47.109 107 105 107s105-49.109 105-107v-26.212c-23.937 16.286-60.461 26.212-105 26.212s-81.063-9.926-105-26.212z"
-                                        fill="#000000" class="color-background" data-original="#000000"></path>
-                                    <path d="m151 150c0 24.853 47.01 45 105 45s105-20.147 105-45z" fill="#000000"
-                                          data-original="#000000" class="color-background"></path>
+                        <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>settings</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g transform="translate(304.000000, 151.000000)">
+                                            <polygon class="color-background" opacity="0.596981957" points="18.0883333 15.7316667 11.1783333 8.82166667 13.3333333 6.66666667 6.66666667 0 0 6.66666667 6.66666667 13.3333333 8.82166667 11.1783333 15.315 17.6716667"></polygon>
+                                            <path class="color-background" d="M31.5666667,23.2333333 C31.0516667,23.2933333 30.53,23.3333333 30,23.3333333 C29.4916667,23.3333333 28.9866667,23.3033333 28.48,23.245 L22.4116667,30.7433333 L29.9416667,38.2733333 C32.2433333,40.575 35.9733333,40.575 38.275,38.2733333 L38.275,38.2733333 C40.5766667,35.9716667 40.5766667,32.2416667 38.275,29.94 L31.5666667,23.2333333 Z" opacity="0.596981957"></path>
+                                            <path class="color-background" d="M33.785,11.285 L28.715,6.215 L34.0616667,0.868333333 C32.82,0.315 31.4483333,0 30,0 C24.4766667,0 20,4.47666667 20,10 C20,10.99 20.1483333,11.9433333 20.4166667,12.8466667 L2.435,27.3966667 C0.95,28.7083333 0.0633333333,30.595 0.00333333333,32.5733333 C-0.0583333333,34.5533333 0.71,36.4916667 2.11,37.89 C3.47,39.2516667 5.27833333,40 7.20166667,40 C9.26666667,40 11.2366667,39.1133333 12.6033333,37.565 L27.1533333,19.5833333 C28.0566667,19.8516667 29.01,20 30,20 C35.5233333,20 40,15.5233333 40,10 C40,8.55166667 39.685,7.18 39.1316667,5.93666667 L33.785,11.285 Z"></path>
+                                        </g>
+                                    </g>
                                 </g>
-                            </g></svg>
-
+                            </g>
+                        </svg>
                     </div>
-                    <span class="nav-link-text me-1">المندوبين</span>
+                    <span class="nav-link-text me-1">Applications</span>
                 </a>
-                <div class="collapse {{Route::is('drivers.*') ? 'show' :''}}" id="componentsExamples">
+                <div class="collapse " id="applicationsExamples">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link {{Route::is('drivers.all') ? 'active' :''}}" href="{{aurl('drivers/all')}}" >
-                                <span class="sidenav-mini-icon"> م </span>
-                                <span class="sidenav-normal"> كل المندوبين </span>
+                            <a class="nav-link " href="../../pages/applications/kanban.html">
+                                <span class="sidenav-mini-icon"> K </span>
+                                <span class="sidenav-normal"> Kanban </span>
                             </a>
                         </li>
-
+                        <li class="nav-item ">
+                            <a class="nav-link " href="../../pages/applications/wizard.html">
+                                <span class="sidenav-mini-icon"> W </span>
+                                <span class="sidenav-normal"> Wizard </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="../../pages/applications/datatables.html">
+                                <span class="sidenav-mini-icon"> D </span>
+                                <span class="sidenav-normal"> DataTables </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="../../pages/applications/calendar.html">
+                                <span class="sidenav-mini-icon"> C </span>
+                                <span class="sidenav-normal"> Calendar </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="../../pages/applications/analytics.html">
+                                <span class="sidenav-mini-icon"> A </span>
+                                <span class="sidenav-normal"> Analytics </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#clientsExamples" class="nav-link active_main_tap {{Route::is('clients.*')? 'active' :'collapsed'}}" aria-controls="componentsExamples" role="button" aria-expanded="{{Route::is('clients.*')? 'true' :'false'}}">
+                <a data-bs-toggle="collapse" href="#ecommerceExamples" class="nav-link " aria-controls="ecommerceExamples" role="button" aria-expanded="false">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center ms-2">
-{{--                        <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">--}}
-{{--                            <title>العملاء</title>--}}
-{{--                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">--}}
-{{--                                <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">--}}
-{{--                                    <g transform="translate(1716.000000, 291.000000)">--}}
-{{--                                        <g transform="translate(1.000000, 0.000000)">--}}
-{{--                                            <path class="color-background" d="M45,0 L26,0 C25.447,0 25,0.447 25,1 L25,20 C25,20.379 25.214,20.725 25.553,20.895 C25.694,20.965 25.848,21 26,21 C26.212,21 26.424,20.933 26.6,20.8 L34.333,15 L45,15 C45.553,15 46,14.553 46,14 L46,1 C46,0.447 45.553,0 45,0 Z" opacity="0.59858631"></path>--}}
-{{--                                            <path class="color-foreground" d="M22.883,32.86 C20.761,32.012 17.324,31 13,31 C8.676,31 5.239,32.012 3.116,32.86 C1.224,33.619 0,35.438 0,37.494 L0,41 C0,41.553 0.447,42 1,42 L25,42 C25.553,42 26,41.553 26,41 L26,37.494 C26,35.438 24.776,33.619 22.883,32.86 Z"></path>--}}
-{{--                                            <path class="color-foreground" d="M13,28 C17.432,28 21,22.529 21,18 C21,13.589 17.411,10 13,10 C8.589,10 5,13.589 5,18 C5,22.529 8.568,28 13,28 Z"></path>--}}
-{{--                                        </g>--}}
-{{--                                    </g>--}}
-{{--                                </g>--}}
-{{--                            </g>--}}
-{{--                        </svg>--}}
-                        <svg  width="12px" height="12px"  xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                              xmlns:svgjs="http://svgjs.com/svgjs" x="0" y="0"
-                              viewBox="0 0 512 512.002" style="enable-background:new 0 0 512 512" xml:space="preserve">
-                            <title>العملاء</title>
-                            <g>
-                                <path  class="color-background" xmlns="http://www.w3.org/2000/svg"
-                                       d="m210.351562 246.632812c33.882813 0 63.222657-12.152343 87.195313-36.128906 23.972656-23.972656 36.125-53.304687 36.125-87.191406 0-33.875-12.152344-63.210938-36.128906-87.191406-23.976563-23.96875-53.3125-36.121094-87.191407-36.121094-33.886718 0-63.21875 12.152344-87.191406 36.125s-36.128906 53.308594-36.128906 87.1875c0 33.886719 12.15625 63.222656 36.132812 87.195312 23.976563 23.96875 53.3125 36.125 87.1875 36.125zm0 0"
-                                       fill="#000000" data-original="#000000"></path>
-                                <path  class="color-background" xmlns="http://www.w3.org/2000/svg"
-                                       d="m426.128906 393.703125c-.691406-9.976563-2.089844-20.859375-4.148437-32.351563-2.078125-11.578124-4.753907-22.523437-7.957031-32.527343-3.308594-10.339844-7.808594-20.550781-13.371094-30.335938-5.773438-10.15625-12.554688-19-20.164063-26.277343-7.957031-7.613282-17.699219-13.734376-28.964843-18.199219-11.226563-4.441407-23.667969-6.691407-36.976563-6.691407-5.226563 0-10.28125 2.144532-20.042969 8.5-6.007812 3.917969-13.035156 8.449219-20.878906 13.460938-6.707031 4.273438-15.792969 8.277344-27.015625 11.902344-10.949219 3.542968-22.066406 5.339844-33.039063 5.339844-10.972656 0-22.085937-1.796876-33.046874-5.339844-11.210938-3.621094-20.296876-7.625-26.996094-11.898438-7.769532-4.964844-14.800782-9.496094-20.898438-13.46875-9.75-6.355468-14.808594-8.5-20.035156-8.5-13.3125 0-25.75 2.253906-36.972656 6.699219-11.257813 4.457031-21.003906 10.578125-28.96875 18.199219-7.605469 7.28125-14.390625 16.121094-20.15625 26.273437-5.558594 9.785157-10.058594 19.992188-13.371094 30.339844-3.199219 10.003906-5.875 20.945313-7.953125 32.523437-2.058594 11.476563-3.457031 22.363282-4.148437 32.363282-.679688 9.796875-1.023438 19.964844-1.023438 30.234375 0 26.726562 8.496094 48.363281 25.25 64.320312 16.546875 15.746094 38.441406 23.734375 65.066406 23.734375h246.53125c26.625 0 48.511719-7.984375 65.0625-23.734375 16.757813-15.945312 25.253906-37.585937 25.253906-64.324219-.003906-10.316406-.351562-20.492187-1.035156-30.242187zm0 0"
-                                       fill="#000000" data-original="#000000"></path>
-                            </g></svg>
+                        <svg class="text-dark" width="12px" height="12px" viewBox="0 0 42 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>basket</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-1869.000000, -741.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g id="basket" transform="translate(153.000000, 450.000000)">
+                                            <path class="color-background" d="M34.080375,13.125 L27.3748125,1.9490625 C27.1377583,1.53795093 26.6972449,1.28682264 26.222716,1.29218729 C25.748187,1.29772591 25.3135593,1.55890827 25.0860125,1.97535742 C24.8584658,2.39180657 24.8734447,2.89865282 25.1251875,3.3009375 L31.019625,13.125 L10.980375,13.125 L16.8748125,3.3009375 C17.1265553,2.89865282 17.1415342,2.39180657 16.9139875,1.97535742 C16.6864407,1.55890827 16.251813,1.29772591 15.777284,1.29218729 C15.3027551,1.28682264 14.8622417,1.53795093 14.6251875,1.9490625 L7.919625,13.125 L0,13.125 L0,18.375 L42,18.375 L42,13.125 L34.080375,13.125 Z" opacity="0.595377604"></path>
+                                            <path class="color-background" d="M3.9375,21 L3.9375,38.0625 C3.9375,40.9619949 6.28800506,43.3125 9.1875,43.3125 L32.8125,43.3125 C35.7119949,43.3125 38.0625,40.9619949 38.0625,38.0625 L38.0625,21 L3.9375,21 Z M14.4375,36.75 L11.8125,36.75 L11.8125,26.25 L14.4375,26.25 L14.4375,36.75 Z M22.3125,36.75 L19.6875,36.75 L19.6875,26.25 L22.3125,26.25 L22.3125,36.75 Z M30.1875,36.75 L27.5625,36.75 L27.5625,26.25 L30.1875,26.25 L30.1875,36.75 Z"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
                     </div>
-                    <span class="nav-link-text me-1">العملاء</span>
+                    <span class="nav-link-text me-1">Ecommerce</span>
                 </a>
-                <div class="collapse {{Route::is('clients.*') ? 'show' :''}}" id="clientsExamples">
+                <div class="collapse " id="ecommerceExamples">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link {{Route::is('clients.all') ? 'active' :''}}"  href="{{aurl('clients/all')}}" >
-                                <span class="sidenav-mini-icon"> ع </span>
-                                <span class="sidenav-normal"> كل العملاء </span>
+                            <a class="nav-link " href="../../pages/ecommerce/overview.html">
+                                <span class="sidenav-mini-icon"> O </span>
+                                <span class="sidenav-normal"> Overview </span>
                             </a>
                         </li>
-
+                        <li class="nav-item ">
+                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#productsExample">
+                                <span class="sidenav-mini-icon"> P </span>
+                                <span class="sidenav-normal"> Products <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse " id="productsExample">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/ecommerce/products/new-product.html">
+                                            <span class="sidenav-mini-icon text-xs"> N </span>
+                                            <span class="sidenav-normal"> New Product </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/ecommerce/products/edit-product.html">
+                                            <span class="sidenav-mini-icon text-xs"> E </span>
+                                            <span class="sidenav-normal"> Edit Product </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/ecommerce/products/product-page.html">
+                                            <span class="sidenav-mini-icon text-xs"> P </span>
+                                            <span class="sidenav-normal"> Product Page </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/ecommerce/products/products-list.html">
+                                            <span class="sidenav-mini-icon text-xs"> P </span>
+                                            <span class="sidenav-normal"> Products List </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#ordersExample">
+                                <span class="sidenav-mini-icon"> O </span>
+                                <span class="sidenav-normal"> Orders <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse " id="ordersExample">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/ecommerce/orders/list.html">
+                                            <span class="sidenav-mini-icon text-xs"> O </span>
+                                            <span class="sidenav-normal"> Order List </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/ecommerce/orders/details.html">
+                                            <span class="sidenav-mini-icon text-xs"> O </span>
+                                            <span class="sidenav-normal"> Order Details </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="../../pages/ecommerce/referral.html">
+                                <span class="sidenav-mini-icon"> R </span>
+                                <span class="sidenav-normal"> Referral </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
-
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#adminsExamples" class="nav-link active_main_tap {{Route::is('admins.*')? 'active' :'collapsed'}}" aria-controls="componentsExamples" role="button" aria-expanded="{{Route::is('admins.*')? 'true' :'false'}}">
+                <a data-bs-toggle="collapse" href="#authExamples" class="nav-link " aria-controls="authExamples" role="button" aria-expanded="false">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center ms-2">
+                        <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>document</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-1870.000000, -591.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g transform="translate(154.000000, 300.000000)">
+                                            <path class="color-background" d="M40,40 L36.3636364,40 L36.3636364,3.63636364 L5.45454545,3.63636364 L5.45454545,0 L38.1818182,0 C39.1854545,0 40,0.814545455 40,1.81818182 L40,40 Z" opacity="0.603585379"></path>
+                                            <path class="color-background" d="M30.9090909,7.27272727 L1.81818182,7.27272727 C0.814545455,7.27272727 0,8.08727273 0,9.09090909 L0,41.8181818 C0,42.8218182 0.814545455,43.6363636 1.81818182,43.6363636 L30.9090909,43.6363636 C31.9127273,43.6363636 32.7272727,42.8218182 32.7272727,41.8181818 L32.7272727,9.09090909 C32.7272727,8.08727273 31.9127273,7.27272727 30.9090909,7.27272727 Z M18.1818182,34.5454545 L7.27272727,34.5454545 L7.27272727,30.9090909 L18.1818182,30.9090909 L18.1818182,34.5454545 Z M25.4545455,27.2727273 L7.27272727,27.2727273 L7.27272727,23.6363636 L25.4545455,23.6363636 L25.4545455,27.2727273 Z M25.4545455,20 L7.27272727,20 L7.27272727,16.3636364 L25.4545455,16.3636364 L25.4545455,20 Z"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="nav-link-text me-1">Authentication</span>
+                </a>
+                <div class="collapse " id="authExamples">
+                    <ul class="nav ms-4 ps-3">
+                        <li class="nav-item ">
+                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#signinExample">
+                                <span class="sidenav-mini-icon"> S </span>
+                                <span class="sidenav-normal"> Sign In <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse " id="signinExample">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/authentication/signin/basic.html">
+                                            <span class="sidenav-mini-icon text-xs"> B </span>
+                                            <span class="sidenav-normal"> Basic </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/authentication/signin/cover.html">
+                                            <span class="sidenav-mini-icon text-xs"> C </span>
+                                            <span class="sidenav-normal"> Cover </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/authentication/signin/illustration.html">
+                                            <span class="sidenav-mini-icon text-xs"> I </span>
+                                            <span class="sidenav-normal"> Illustration </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#signupExample">
+                                <span class="sidenav-mini-icon"> S </span>
+                                <span class="sidenav-normal"> Sign Up <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse " id="signupExample">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/authentication/signup/basic.html">
+                                            <span class="sidenav-mini-icon text-xs"> B </span>
+                                            <span class="sidenav-normal"> Basic </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/authentication/signup/cover.html">
+                                            <span class="sidenav-mini-icon text-xs"> C </span>
+                                            <span class="sidenav-normal"> Cover </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/authentication/signup/illustration.html">
+                                            <span class="sidenav-mini-icon text-xs"> I </span>
+                                            <span class="sidenav-normal"> Illustration </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#resetExample">
+                                <span class="sidenav-mini-icon"> R </span>
+                                <span class="sidenav-normal"> Reset Password <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse " id="resetExample">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/authentication/reset/basic.html">
+                                            <span class="sidenav-mini-icon text-xs"> B </span>
+                                            <span class="sidenav-normal"> Basic </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/authentication/reset/cover.html">
+                                            <span class="sidenav-mini-icon text-xs"> C </span>
+                                            <span class="sidenav-normal"> Cover </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/authentication/reset/illustration.html">
+                                            <span class="sidenav-mini-icon text-xs"> I </span>
+                                            <span class="sidenav-normal"> Illustration </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#lockExample">
+                                <span class="sidenav-mini-icon"> L </span>
+                                <span class="sidenav-normal"> Lock <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse " id="lockExample">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/authentication/lock/basic.html">
+                                            <span class="sidenav-mini-icon text-xs"> B </span>
+                                            <span class="sidenav-normal"> Basic </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/authentication/lock/cover.html">
+                                            <span class="sidenav-mini-icon text-xs"> C </span>
+                                            <span class="sidenav-normal"> Cover </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/authentication/lock/illustration.html">
+                                            <span class="sidenav-mini-icon text-xs"> I </span>
+                                            <span class="sidenav-normal"> Illustration </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#StepExample">
+                                <span class="sidenav-mini-icon"> 2 </span>
+                                <span class="sidenav-normal"> 2-Step Verification <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse " id="StepExample">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/authentication/verification/basic.html">
+                                            <span class="sidenav-mini-icon text-xs"> B </span>
+                                            <span class="sidenav-normal"> Basic </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/authentication/verification/cover.html">
+                                            <span class="sidenav-mini-icon text-xs"> C </span>
+                                            <span class="sidenav-normal"> Cover </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/authentication/verification/illustration.html">
+                                            <span class="sidenav-mini-icon text-xs"> I </span>
+                                            <span class="sidenav-normal"> Illustration </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#errorExample">
+                                <span class="sidenav-mini-icon"> E </span>
+                                <span class="sidenav-normal"> Error <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse " id="errorExample">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/authentication/error/404.html">
+                                            <span class="sidenav-mini-icon text-xs"> E </span>
+                                            <span class="sidenav-normal"> Error 404 </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="../../pages/authentication/error/500.html">
+                                            <span class="sidenav-mini-icon text-xs"> E </span>
+                                            <span class="sidenav-normal"> Error 500 </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <hr class="horizontal dark" />
+                <h6 class="ps-4 me-4 text-uppercase text-xs font-weight-bolder opacity-6">DOCS</h6>
+            </li>
+            <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#basicExamples" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center ms-2">
+                        <svg width="12px" height="20px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>spaceship</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-1720.000000, -592.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g transform="translate(4.000000, 301.000000)">
+                                            <path class="color-background" d="M39.3,0.706666667 C38.9660984,0.370464027 38.5048767,0.192278529 38.0316667,0.216666667 C14.6516667,1.43666667 6.015,22.2633333 5.93166667,22.4733333 C5.68236407,23.0926189 5.82664679,23.8009159 6.29833333,24.2733333 L15.7266667,33.7016667 C16.2013871,34.1756798 16.9140329,34.3188658 17.535,34.065 C17.7433333,33.98 38.4583333,25.2466667 39.7816667,1.97666667 C39.8087196,1.50414529 39.6335979,1.04240574 39.3,0.706666667 Z M25.69,19.0233333 C24.7367525,19.9768687 23.3029475,20.2622391 22.0572426,19.7463614 C20.8115377,19.2304837 19.9992882,18.0149658 19.9992882,16.6666667 C19.9992882,15.3183676 20.8115377,14.1028496 22.0572426,13.5869719 C23.3029475,13.0710943 24.7367525,13.3564646 25.69,14.31 C26.9912731,15.6116662 26.9912731,17.7216672 25.69,19.0233333 L25.69,19.0233333 Z"></path>
+                                            <path class="color-background" d="M1.855,31.4066667 C3.05106558,30.2024182 4.79973884,29.7296005 6.43969145,30.1670277 C8.07964407,30.6044549 9.36054508,31.8853559 9.7979723,33.5253085 C10.2353995,35.1652612 9.76258177,36.9139344 8.55833333,38.11 C6.70666667,39.9616667 0,40 0,40 C0,40 0,33.2566667 1.855,31.4066667 Z"></path>
+                                            <path class="color-background" d="M17.2616667,3.90166667 C12.4943643,3.07192755 7.62174065,4.61673894 4.20333333,8.04166667 C3.31200265,8.94126033 2.53706177,9.94913142 1.89666667,11.0416667 C1.5109569,11.6966059 1.61721591,12.5295394 2.155,13.0666667 L5.47,16.3833333 C8.55036617,11.4946947 12.5559074,7.25476565 17.2616667,3.90166667 L17.2616667,3.90166667 Z" opacity="0.598539807"></path>
+                                            <path class="color-background" d="M36.0983333,22.7383333 C36.9280725,27.5056357 35.3832611,32.3782594 31.9583333,35.7966667 C31.0587397,36.6879974 30.0508686,37.4629382 28.9583333,38.1033333 C28.3033941,38.4890431 27.4704606,38.3827841 26.9333333,37.845 L23.6166667,34.53 C28.5053053,31.4496338 32.7452344,27.4440926 36.0983333,22.7383333 L36.0983333,22.7383333 Z" opacity="0.598539807"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="nav-link-text me-1">Basic</span>
+                </a>
+                <div class="collapse " id="basicExamples">
+                    <ul class="nav ms-4 ps-3">
+                        <li class="nav-item ">
+                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#gettingStartedExample">
+                                <span class="sidenav-mini-icon"> G </span>
+                                <span class="sidenav-normal"> Getting Started <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse " id="gettingStartedExample">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/quick-start/soft-ui-dashboard" target="_blank">
+                                            <span class="sidenav-mini-icon text-xs"> Q </span>
+                                            <span class="sidenav-normal"> Quick Start </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/license/soft-ui-dashboard" target="_blank">
+                                            <span class="sidenav-mini-icon text-xs"> L </span>
+                                            <span class="sidenav-normal"> License </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/overview/soft-ui-dashboard" target="_blank">
+                                            <span class="sidenav-mini-icon text-xs"> C </span>
+                                            <span class="sidenav-normal"> Contents </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/build-tools/soft-ui-dashboard" target="_blank">
+                                            <span class="sidenav-mini-icon text-xs"> B </span>
+                                            <span class="sidenav-normal"> Build Tools </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#foundationExample">
+                                <span class="sidenav-mini-icon"> F </span>
+                                <span class="sidenav-normal"> Foundation <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse " id="foundationExample">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/colors/soft-ui-dashboard" target="_blank">
+                                            <span class="sidenav-mini-icon text-xs"> C </span>
+                                            <span class="sidenav-normal"> Colors </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/grid/soft-ui-dashboard" target="_blank">
+                                            <span class="sidenav-mini-icon text-xs"> G </span>
+                                            <span class="sidenav-normal"> Grid </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/typography/soft-ui-dashboard" target="_blank">
+                                            <span class="sidenav-mini-icon text-xs"> T </span>
+                                            <span class="sidenav-normal"> Typography </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/icons/soft-ui-dashboard" target="_blank">
+                                            <span class="sidenav-mini-icon text-xs"> I </span>
+                                            <span class="sidenav-normal"> Icons </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#componentsExamples" class="nav-link " aria-controls="componentsExamples" role="button" aria-expanded="false">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center ms-2">
                         <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <title>المشرفين</title>
+                            <title>customer-support</title>
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                 <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">
                                     <g transform="translate(1716.000000, 291.000000)">
@@ -237,201 +660,150 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text me-1">المشرفين</span>
+                    <span class="nav-link-text me-1">Components</span>
                 </a>
-                <div class="collapse {{Route::is('admins.*') ? 'show' :''}}" id="adminsExamples">
+                <div class="collapse " id="componentsExamples">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link {{Route::is('admins.all') ? 'active' :''}}"  href="{{aurl('admins/all')}}" >
-                                <span class="sidenav-mini-icon"> م </span>
-                                <span class="sidenav-normal"> كل المشرفين </span>
+                            <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/alerts/soft-ui-dashboard" target="_blank">
+                                <span class="sidenav-mini-icon"> A </span>
+                                <span class="sidenav-normal"> Alerts </span>
                             </a>
                         </li>
-
+                        <li class="nav-item ">
+                            <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/badge/soft-ui-dashboard" target="_blank">
+                                <span class="sidenav-mini-icon"> B </span>
+                                <span class="sidenav-normal"> Badge </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/buttons/soft-ui-dashboard" target="_blank">
+                                <span class="sidenav-mini-icon"> B </span>
+                                <span class="sidenav-normal"> Buttons </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/cards/soft-ui-dashboard" target="_blank">
+                                <span class="sidenav-mini-icon"> C </span>
+                                <span class="sidenav-normal"> Card </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/carousel/soft-ui-dashboard" target="_blank">
+                                <span class="sidenav-mini-icon"> C </span>
+                                <span class="sidenav-normal"> Carousel </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/collapse/soft-ui-dashboard" target="_blank">
+                                <span class="sidenav-mini-icon"> C </span>
+                                <span class="sidenav-normal"> Collapse </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/dropdowns/soft-ui-dashboard" target="_blank">
+                                <span class="sidenav-mini-icon"> D </span>
+                                <span class="sidenav-normal"> Dropdowns </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/forms/soft-ui-dashboard" target="_blank">
+                                <span class="sidenav-mini-icon"> F </span>
+                                <span class="sidenav-normal"> Forms </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/modal/soft-ui-dashboard" target="_blank">
+                                <span class="sidenav-mini-icon"> M </span>
+                                <span class="sidenav-normal"> Modal </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/navs/soft-ui-dashboard" target="_blank">
+                                <span class="sidenav-mini-icon"> N </span>
+                                <span class="sidenav-normal"> Navs </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/navbar/soft-ui-dashboard" target="_blank">
+                                <span class="sidenav-mini-icon"> N </span>
+                                <span class="sidenav-normal"> Navbar </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/pagination/soft-ui-dashboard" target="_blank">
+                                <span class="sidenav-mini-icon"> P </span>
+                                <span class="sidenav-normal"> Pagination </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/popovers/soft-ui-dashboard" target="_blank">
+                                <span class="sidenav-mini-icon"> P </span>
+                                <span class="sidenav-normal"> Popovers </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/progress/soft-ui-dashboard" target="_blank">
+                                <span class="sidenav-mini-icon"> P </span>
+                                <span class="sidenav-normal"> Progress </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/spinners/soft-ui-dashboard" target="_blank">
+                                <span class="sidenav-mini-icon"> S </span>
+                                <span class="sidenav-normal"> Spinners </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/tables/soft-ui-dashboard" target="_blank">
+                                <span class="sidenav-mini-icon"> T </span>
+                                <span class="sidenav-normal"> Tables </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="https://www.creative-tim.com/learning-lab/bootstrap-marketplace/tooltips/soft-ui-dashboard" target="_blank">
+                                <span class="sidenav-mini-icon"> T </span>
+                                <span class="sidenav-normal"> Tooltips </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
-
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#slidersExamples" class="nav-link active_main_tap {{Route::is('slider.*')? 'active' :'collapsed'}}" aria-controls="componentsExamples" role="button" aria-expanded="{{Route::is('slider.*')? 'true' :'false'}}">
-                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center ms-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                             xmlns:svgjs="http://svgjs.com/svgjs" width="12px" height="12px" x="0" y="0"
-                             viewBox="0 0 508 508" style="enable-background:new 0 0 512 512" xml:space="preserve">
-                            <title>صور العرض</title>
-                            <g>
-                                <g xmlns="http://www.w3.org/2000/svg">
-                                    <path class="color-background"
-                                        d="m254 376c-22.056 0-40 17.944-40 40s17.944 40 40 40 40-17.944 40-40-17.944-40-40-40zm0 60c-11.028 0-20-8.972-20-20s8.972-20 20-20 20 8.972 20 20-8.972 20-20 20zm-140-54c-18.748 0-34 15.252-34 34s15.252 34 34 34 34-15.252 34-34-15.252-34-34-34zm0 48c-7.72 0-14-6.28-14-14s6.28-14 14-14 14 6.28 14 14-6.28 14-14 14zm280-48c-18.748 0-34 15.252-34 34s15.252 34 34 34 34-15.252 34-34-15.252-34-34-34zm0 48c-7.72 0-14-6.28-14-14s6.28-14 14-14 14 6.28 14 14-6.28 14-14 14zm-60-230c29.776 0 54-24.224 54-54s-24.224-54-54-54-54 24.224-54 54 24.224 54 54 54zm0-88c18.748 0 34 15.252 34 34s-15.252 34-34 34-34-15.252-34-34 15.252-34 34-34zm164 81.07c5.51 0 10 4.49 10 10s-4.49 10-10 10-10-4.49-10-10 4.49-10 10-10zm-488 20c-5.51 0-10-4.48-10-10 0-5.51 4.49-10 10-10s10 4.49 10 10c0 5.52-4.49 10-10 10zm468-131.428h-50v-19.642c0-5.523-4.477-10-10-10h-328c-5.523 0-10 4.477-10 10v20h-50c-16.569 0-30 13.431-30 30v45.723c0 5.318 4 9.973 9.306 10.334 5.822.397 10.694-4.236 10.694-9.976v-46.081c.01-5.5 4.5-9.99 10-10h50v206h-50c-5.5-.01-9.99-4.5-10-10v-49.93c0-5.74-4.872-10.373-10.694-9.976-5.306.361-9.306 5.016-9.306 10.334v49.572c0 16.569 13.431 30 30 30h50v20c0 5.523 4.477 10 10 10h328c5.523 0 10-4.477 10-10v-20.358h50c16.569 0 30-13.431 30-30v-49.572c0-5.318-4-9.973-9.306-10.334-5.822-.396-10.694 4.237-10.694 9.976v49.93c-.01 5.5-4.5 9.99-10 10h-50v-206h50c5.5.01 9.99 4.5 10 10v46.081c0 5.74 4.872 10.373 10.694 9.976 5.306-.361 9.306-5.016 9.306-10.334v-45.723c0-16.569-13.431-30-30-30zm-70-9.642v262.172l-133.226-124.538c-16.977-15.87-43.573-15.869-60.549 0l-29.901 27.951-73.111-91.388c-3.008-3.76-6.877-6.582-11.214-8.295v-65.902zm-308 92.195 99.601 124.5c8.322 10.402 23.939-2.092 15.617-12.494l-18.362-22.953 31.028-29.004c9.317-8.71 23.916-8.71 33.233 0l121.69 113.756h-282.807z"
-                                        fill="#000000" data-original="#000000"></path>
-                                </g>
-                            </g>
-                        </svg>
-                    </div>
-                    <span class="nav-link-text me-1">صور العرض</span>
-                </a>
-                <div class="collapse {{Route::is('slider.*') ? 'show' :''}}" id="slidersExamples">
-                    <ul class="nav ms-4 ps-3">
-                        <li class="nav-item ">
-                            <a class="nav-link {{Route::is('slider.all') ? 'active' :''}}"  href="{{aurl('slider/all')}}" >
-                                <span class="sidenav-mini-icon"> ص </span>
-                                <span class="sidenav-normal"> سلايدر الرئيسية </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link {{Route::is('offerSlider.all') ? 'active' :''}}"  href="{{aurl('offerSlider/all')}}" >
-                                <span class="sidenav-mini-icon"> ص </span>
-                                <span class="sidenav-normal"> سلايدر الفروع </span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#contactExamples" class="nav-link active_main_tap {{Route::is('contact.*')? 'active' :'collapsed'}}" aria-controls="componentsExamples" role="button" aria-expanded="{{Route::is('contact.*')? 'true' :'false'}}">
-                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center ms-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                             xmlns:svgjs="http://svgjs.com/svgjs" width="12px" height="12px" x="0" y="0"
-                             viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve">
-                            <title>قائمة الشكاوى</title>
-                            <g>
-                                <path xmlns="http://www.w3.org/2000/svg" class="color-background"
-                                      d="m18 1h-12a5.006 5.006 0 0 0 -5 5v8a5.009 5.009 0 0 0 4 4.9v3.1a1 1 0 0 0 1.555.832l5.745-3.832h5.7a5.006 5.006 0 0 0 5-5v-8a5.006 5.006 0 0 0 -5-5zm-2 12h-8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2zm2-4h-12a1 1 0 0 1 0-2h12a1 1 0 0 1 0 2z"
-                                      fill="#000000" data-original="#000000"></path>
-                            </g>
-                        </svg>
-                    </div>
-                    <span class="nav-link-text me-1">قائمة الشكاوى</span>
-                </a>
-                <div class="collapse {{Route::is('contact.*') ? 'show' :''}}" id="contactExamples">
-                    <ul class="nav ms-4 ps-3">
-                        <li class="nav-item ">
-                            <a class="nav-link {{Route::is('contact.all') ? 'active' :''}}"  href="{{aurl('contact/all')}}" >
-                                <span class="sidenav-mini-icon"> م </span>
-                                <span class="sidenav-normal">  قائمة الشكاوى </span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#settingExamples" class="nav-link active_main_tap {{Route::is('setting.*')? 'active' :'collapsed'}}" aria-controls="componentsExamples" role="button" aria-expanded="{{Route::is('setting.*')? 'true' :'false'}}">
-                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center ms-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="12px" height="12px" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve"><g>
-                                <title>الاعدادات العامة</title>
-                                <g xmlns="http://www.w3.org/2000/svg">
-                                    <g>
-                                        <path class="color-background" d="M496.659,312.107l-47.061-36.8c0.597-5.675,1.109-12.309,1.109-19.328c0-7.019-0.491-13.653-1.109-19.328l47.104-36.821    c8.747-6.912,11.136-19.179,5.568-29.397L453.331,85.76c-5.227-9.557-16.683-14.464-28.309-10.176l-55.531,22.293    c-10.645-7.68-21.803-14.165-33.344-19.349l-8.448-58.901C326.312,8.448,316.584,0,305.086,0h-98.133    c-11.499,0-21.205,8.448-22.571,19.456l-8.469,59.115c-11.179,5.035-22.165,11.435-33.28,19.349l-55.68-22.357    C76.52,71.531,64.04,76.053,58.856,85.568L9.854,170.347c-5.781,9.771-3.392,22.464,5.547,29.547l47.061,36.8    c-0.747,7.189-1.109,13.44-1.109,19.307s0.363,12.117,1.109,19.328l-47.104,36.821c-8.747,6.933-11.115,19.2-5.547,29.397    l48.939,84.672c5.227,9.536,16.576,14.485,28.309,10.176l55.531-22.293c10.624,7.659,21.781,14.144,33.323,19.349l8.448,58.88    C185.747,503.552,195.454,512,206.974,512h98.133c11.499,0,21.227-8.448,22.592-19.456l8.469-59.093    c11.179-5.056,22.144-11.435,33.28-19.371l55.68,22.357c2.688,1.045,5.483,1.579,8.363,1.579c8.277,0,15.893-4.523,19.733-11.563    l49.152-85.12C507.838,331.349,505.448,319.083,496.659,312.107z M256.019,341.333c-47.061,0-85.333-38.272-85.333-85.333    s38.272-85.333,85.333-85.333s85.333,38.272,85.333,85.333S303.08,341.333,256.019,341.333z" fill="#000000" data-original="#000000"></path>
+                <a class="nav-link" href="https://github.com/creativetimofficial/ct-soft-ui-dashboard-pro/blob/main/CHANGELOG.md" target="_blank">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center ms-2 d-flex align-items-center justify-content-center">
+                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>credit-card</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g transform="translate(453.000000, 454.000000)">
+                                            <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
+                                            <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+                                        </g>
                                     </g>
                                 </g>
-                                <g xmlns="http://www.w3.org/2000/svg">
-                                </g>
-                                <g xmlns="http://www.w3.org/2000/svg">
-                                </g>
-                                <g xmlns="http://www.w3.org/2000/svg">
-                                </g>
-                                <g xmlns="http://www.w3.org/2000/svg">
-                                </g>
-                                <g xmlns="http://www.w3.org/2000/svg">
-                                </g>
-                                <g xmlns="http://www.w3.org/2000/svg">
-                                </g>
-                                <g xmlns="http://www.w3.org/2000/svg">
-                                </g>
-                                <g xmlns="http://www.w3.org/2000/svg">
-                                </g>
-                                <g xmlns="http://www.w3.org/2000/svg">
-                                </g>
-                                <g xmlns="http://www.w3.org/2000/svg">
-                                </g>
-                                <g xmlns="http://www.w3.org/2000/svg">
-                                </g>
-                                <g xmlns="http://www.w3.org/2000/svg">
-                                </g>
-                                <g xmlns="http://www.w3.org/2000/svg">
-                                </g>
-                                <g xmlns="http://www.w3.org/2000/svg">
-                                </g>
-                                <g xmlns="http://www.w3.org/2000/svg">
-                                </g>
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text me-1">الاعدادات العامة</span>
+                    <span class="nav-link-text me-1">Changelog</span>
                 </a>
-                <div class="collapse {{Route::is('setting.*') ? 'show' :''}}" id="settingExamples">
-                    <ul class="nav ms-4 ps-3">
-                        <li class="nav-item ">
-                            <a class="nav-link {{Route::is('setting.all') ? 'active' :''}}"  href="{{aurl('setting/all')}}" >
-                                <span class="sidenav-mini-icon"> ع </span>
-                                <span class="sidenav-normal">  الاعدادات العامة </span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </div>
             </li>
-
-
         </ul>
     </div>
-{{--    <div class="sidenav-footer mx-3 mt-3 pt-3">--}}
-{{--        <div class="card card-background shadow-none card-background-mask-secondary" id="sidenavCard">--}}
-{{--            <div class="full-background" style="background-image: url('../../assets/img/curved-images/white-curved.jpg')"></div>--}}
-{{--            <div class="card-body text-start p-3 w-100">--}}
-{{--                <div class="icon icon-shape icon-sm bg-white shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md">--}}
-{{--                    <i class="ni ni-diamond text-dark text-gradient text-lg top-0" aria-hidden="true" id="sidenavCardIcon"></i>--}}
-{{--                </div>--}}
-{{--                <div class="docs-info">--}}
-{{--                    <h6 class="text-white up mb-0 text-end">تحتاج مساعدة?</h6>--}}
-{{--                    <p class="text-xs font-weight-bold text-end">يرجى التحقق من مستنداتنا</p>--}}
-{{--                    <a href="https://www.creative-tim.com/learning-lab/bootstrap/overview/soft-ui-dashboard" target="_blank" class="btn btn-white btn-sm w-100 mb-0">توثيق</a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    <div class="sidenav-footer mx-3 mt-3 pt-3">
+        <div class="card card-background shadow-none card-background-mask-secondary" id="sidenavCard">
+            <div class="full-background" style="background-image: url('../../assets/img/curved-images/white-curved.jpg')"></div>
+            <div class="card-body text-start p-3 w-100">
+                <div class="icon icon-shape icon-sm bg-white shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md">
+                    <i class="ni ni-diamond text-dark text-gradient text-lg top-0" aria-hidden="true" id="sidenavCardIcon"></i>
+                </div>
+                <div class="docs-info">
+                    <h6 class="text-white up mb-0 text-end">تحتاج مساعدة?</h6>
+                    <p class="text-xs font-weight-bold text-end">يرجى التحقق من مستنداتنا</p>
+                    <a href="https://www.creative-tim.com/learning-lab/bootstrap/overview/soft-ui-dashboard" target="_blank" class="btn btn-white btn-sm w-100 mb-0">توثيق</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </aside>
-
-@push('admin_js')
-    <script>
-        $(document).on('click','.active_main_tap',function () {
-            $('.active_main_tap').removeClass('active');
-            $('.active_main_tap').attr('aria-expanded','false');
-            // $(this).addClass('active');
-            // $(this).attr('aria-expanded','true');
-        })
-    </script>
-    <script>
-        $(document).ready(function () {
-            {{--alert({{Route::getCurrentRoute()->getPath()}})--}}
-            {{--alert({{Route::getCurrentRoute()->getPath()}})--}}
-            var links = $('a.nav-link') ;
-            $('a.nav-link').each(function(key,value){
-                // if(window.location == value){ //pathname
-                //     alert(window.location )
-                    // alert(value )
-                // }
-
-                // if (window.location.href.indexOf(value) != -1){
-                {{--if({{Request::url()}} == value){--}}
-                {{--    alert(value)--}}
-                {{--}--}}
-                // code
-{{--                @endif--}}
-                // if (value == window.location.pathname){
-                //     alert(value)
-                //     // $(this).parent().parent().parent().parent().find('.active_main_tap').addClass('active')
-                //     return false;
-                // // $('.active_main_tap').removeClass('active');
-                // // $('.active_main_tap').attr('aria-expanded','false');
-                // // $(this).addClass('active');
-                // // $(this).next('.collapse').find().attr('href') == url()->current();
-                // }
-            })
-        })
-    </script>
-@endpush

@@ -23,8 +23,8 @@ class HomeController extends Controller
     public function products(Request $request){
         $data = Products::where('is_sale',true)->where('is_active',true)->latest();
 
-        if ($request->has('category_ids') && count($request->category_ids)){
-            $data->wherein('category_id',$request->category_ids);
+        if ($request->has('category_id') && count($request->category_ids)){
+            $data->wherein('category_id',$request->category_id);
         }
 
         if ($request->has('search') && $request->search != ''){
@@ -100,7 +100,7 @@ class HomeController extends Controller
         ];
         $validator = Validator::make($request->all(),$rules);
         if ($validator->fails()){
-            return response()->json(['data'=>null,'message'=>$validator->errors(),'status'=>422],422);
+            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],422);
         }else {
             $offers = Products::where(['id' => $request->product_id , 'is_active' => true, 'is_sale' => true])->first();
             if ($offers){
@@ -110,7 +110,7 @@ class HomeController extends Controller
                     $data = Products::where(['id' => $offers->id ])->first();
                 }
             }else{
-                return response()->json(['data'=>null,'message'=>'product not active or not for sale','status'=>409],409);
+                return response()->json(['data'=>null,'message'=>'product not active or not for sale','code'=>409],409);
             }
 
             return helperJson($data);

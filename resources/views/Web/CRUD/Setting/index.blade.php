@@ -93,6 +93,26 @@
 {{--                                <input class="form-control m-input"  name="tax_percentage" type="number" value="{{$slider->tax_percentage}}" >--}}
 {{--                            </div>--}}
 {{--                        </div>--}}
+
+                        <div class="form-group m-form__group row">
+                            <label for="example-text-input"  class="col-3 col-form-label">قيمة هدايا الشراء</label>
+                            <div class="col-8">
+                                <input class="form-control m-input"  name="purchase_gift_value" type="number" value="{{$setting->purchase_gift_value}}" >
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label for="example-text-input"  class="col-3 col-form-label">لكل</label>
+                            <div class="col-8">
+                                <input class="form-control m-input"  name="purchase_gift" type="number" value="{{$setting->purchase_gift}}" >
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label for="example-text-input"  class="col-3 col-form-label">مشاركة التطبيق</label>
+                            <div class="col-8">
+                                <input class="form-control m-input"  name="register_gift" type="number" value="{{$setting->register_gift}}" >
+                            </div>
+                        </div>
+
                         <div class="form-group m-form__group row">
                             <label for="example-text-input" class="col-3 col-form-label">الشروط والاحكام</label>
                             <div class="col-8">

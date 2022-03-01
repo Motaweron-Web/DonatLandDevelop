@@ -10,6 +10,7 @@ use App\Http\Controllers\Web\{
     OfferSlider\OfferSliderController,
     Contact\ContactController,
     Setting\SettingController,
+    Branch\BranchController,
     Order\OrderController
 };
 /*
@@ -22,6 +23,15 @@ use App\Http\Controllers\Web\{
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/clear-cache', function() {
+     Artisan::call('optimize:clear');
+     Artisan::call('route:clear');
+     Artisan::call('config:clear');
+     Artisan::call('view:clear');
+     Artisan::call('cache:clear');
+     return 'cashe cleared';
+});
+
 //================================ Auth ==============================
 
 Route::group(['namespace' => 'Admin'],function (){
@@ -66,6 +76,14 @@ Route::group(['namespace' => 'OfferSlider','middleware'=>'admin','prefix'=>'offe
 Route::group(['namespace' => 'Contact','middleware'=>'admin','prefix'=>'contact'],function (){
     Route::get('all',[ContactController::class,'index'])->name('contact.all');
     Route::post('contact_delete',[ContactController::class,'contact_delete'])->name('contact_delete');
+});
+//=======
+//============================== branch =========================
+Route::group(['namespace' => 'Branch','middleware'=>'admin','prefix'=>'branch'],function (){
+    Route::get('all',[BranchController::class,'index'])->name('branch.all');
+    Route::post('change_name2',[BranchController::class,'change_name2'])->name('change_name2');
+    Route::post('branch_control',[BranchController::class,'branch_control'])->name('branch_control');
+
 });
 //============================== setting =========================
 Route::group(['namespace' => 'Setting','middleware'=>'admin','prefix'=>'setting'],function (){

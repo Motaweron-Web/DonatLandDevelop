@@ -13,18 +13,18 @@
     @include('Web.layouts.inc.sidebar')
 {{--=============== sidebar =============--}}
 
-<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg overflow-hidden" style="min-height: 100vh;">
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg overflow-hidden">
     {{--=============== header =============--}}
     @include('Web.layouts.inc.header')
     {{--=============== header =============--}}
-     <div class="container-fluid py-4" >
+     <div class="container-fluid py-4">
         {{--=============== load content =============--}}
         @yield('content')
         {{--=============== load content =============--}}
      </div>
 
     {{--=============== footer =============--}}
-{{--    @include('Web.layouts.inc.footer')--}}
+    @include('Web.layouts.inc.footer')
     {{--=============== footer =============--}}
 
 

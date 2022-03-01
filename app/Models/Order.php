@@ -22,7 +22,4 @@ class Order extends Model
     public function customer(){
         return $this->belongsTo(Customers::class,'customer_id');
     }
-    public function delivery(){
-        return $this->belongsTo(Representative::class,'delivery_id');
-    }
 }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\DefaultImage;
 use App\Models\Customers;
-use App\Models\GeneralSetting;
 use App\Models\PhoneToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,23 +18,13 @@ class AuthController extends Controller
     {
         $this->middleware('jwt')->only('logout','getProfile','getProfile');
     }//end fun
-
-    function randstr ($len=3, $abc="aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ0123456789") {
-        $letters = str_split($abc);
-        $str = "";
-        for ($i=0; $i<=$len; $i++) {
-            $str .= $letters[rand(0, count($letters)-1)];
-        }
-        return $str;
-    }
-
     public function login(Request $request){
         $rules = [
             'phone_number'=>'required|exists:customers,phone_number'
         ];
         $validator = Validator::make($request->all(),$rules);
         if ($validator->fails()){
-            return response()->json(['data'=>null,'message'=>$validator->errors(),'status'=>422],200);
+            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],200);
         }
         $data = $request->validate($rules);
             $user = Customers::where($data);
@@ -55,30 +44,19 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function register(Request $request){
-
         $rules = [
             'phone_number'=>'required|unique:customers,phone_number',
-            'name'=>'required',     //       |min:10|max:191
-            'address'=>'nullable',  // |min:5|max:191
-            'city'=>'nullable',     // |min:3|max:191
+            'name'=>'required|min:10|max:191',
+            'address'=>'nullable|min:5|max:191',
+            'city'=>'nullable|min:3|max:191',
             'photo'=>'nullable',
             'register_by'=>'nullable'
         ];
         $validator = Validator::make($request->all(),$rules);
         if ($validator->fails()){
-            return response()->json(['data'=>null,'message'=>$validator->errors(),'status'=>422],200);
+            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],200);
         }
         $data = $request->validate($rules);
-
-        if ($request->register_by != null) {
-            $user = Customers::where('code', $request->register_by)->first();
-            if ($user){
-                $user->share_gifts += GeneralSetting::first()->register_gift;
-    //            $user->total += Setting::first()->share_price;
-                $user->save();
-            }
-
-        }
 
 
         if ($request->hasFile('photo')){
@@ -88,8 +66,6 @@ class AuthController extends Controller
         }
 
         $customer = Customers::updateOrCreate($data);
-         $customer['code'] = $this->randstr().rand(1000,9999);
-        $customer->save();
 
         if ($customer){
             if (! $token = JWTAuth::fromUser($customer)) {
@@ -109,7 +85,7 @@ class AuthController extends Controller
         ];
         $validator = Validator::make($request->all(),$rules);
         if ($validator->fails()){
-            return response()->json(['data'=>null,'message'=>$validator->errors(),'status'=>422],200);
+            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],200);
         }else{
             PhoneToken::where('phone_token',$request->phone_token)->delete();
             \auth()->logout();
@@ -154,35 +130,28 @@ class AuthController extends Controller
         $rules = [
 //            'phone_number'=>'required|unique:customers,phone_number',
             'id'=>'required|exists:customers,id',
-            'name'=>'required',     // |min:10|max:191
-            'address'=>'nullable',  // |min:5|max:191
-            'city'=>'nullable',     // |min:3|max:191
+            'name'=>'required|min:10|max:191',
+            'address'=>'nullable|min:5|max:191',
+            'city'=>'nullable|min:3|max:191',
             'photo'=>'nullable',
             'register_by'=>'nullable'
         ];
         $validator = Validator::make($request->all(),$rules);
         if ($validator->fails()){
-            return response()->json(['data'=>null,'message'=>$validator->errors(),'status'=>422],200);
+            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],200);
         }else {
             $data = $request->all();
+//            $user = Customers::where('id',$request->id)->first();
+
             if ($request->hasFile('photo')){
                 $data['photo'] = $this->uploadFiles('customers',$request->file('photo'));
             }else{
                 $data['photo'] = $this->storeDefaultImage('customers',$request->name);
             }
-            Customers::where('id',$request->id)->update($data);
-            $user = Customers::where('id',$request->id)->first();
-//            return $user;
-//            $data_ = null;
-//            $data_['user'] = $user;
+            $customer = Customers::where('id',$request->id)->update($data);
+            $data = Customers::where('id',$request->id)->first();
 
-                if (! $token = JWTAuth::fromUser($user)) {
-                    return helperJson(null,'there is no user',400);
-                }
-                return helperJson($this->respondWithToken($token,$user),'profile updated successfully');
-
-
-//            return helperJson($data_,'profile updated successfully');
+            return helperJson($data,'profile updated successfully');
         }
 
     }//end fun
@@ -195,7 +164,7 @@ class AuthController extends Controller
         ];
         $validator = Validator::make($request->all(),$rules);
         if ($validator->fails()){
-            return response()->json(['data'=>null,'message'=>$validator->errors(),'status'=>422],200);
+            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],200);
         }else{
             $data = PhoneToken::updateOrCreate($request->all());
             return helperJson($data,'token added successfully');

@@ -19,6 +19,9 @@ class SettingController extends Controller
         $setting->tax_for           = $request->tax_for;
         $setting->terms             = $request->terms;
         $setting->about             = $request->about;
+        $setting->purchase_gift_value = $request->purchase_gift_value;
+        $setting->purchase_gift     = $request->purchase_gift;
+        $setting->register_gift     = $request->register_gift;
         $setting->save();
         toastr()->success('تم تعديل الاعدادات بنجاح');
         return redirect()->back();

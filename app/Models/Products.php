@@ -10,24 +10,7 @@ class Products extends Model
     use HasFactory;
 
 
-
-
-    protected $appends=['is_favorite','price_tax'];
-
-    public function getPriceTaxAttribute()
-    {
-        $tax = Tax::where('id',$this->tax_id)->first();
-
-        if (Tax::where('id',$this->tax_id)->count() && $this->tax_method == 1){
-            $taxValue = ($tax->rate / 100) * $this->price;
-            return $taxValue + $this->price;
-        }else{
-            return $this->price;
-        }//end if
-
-        return $this->price;
-
-    }//end fun
+    protected $appends=['is_favorite'];
 
     public function getIsFavoriteAttribute()
     {

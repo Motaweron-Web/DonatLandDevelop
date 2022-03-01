@@ -7,29 +7,24 @@ use App\Http\Traits\DefaultImage;
 use App\Models\Customers;
 use App\Models\Deliveries;
 use App\Models\PhoneToken;
-use App\Http\Traits\GeneralTrait;
-use App\Http\Traits\PhotoTrait;
-use App\Models\RepresentativeToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
-
-
 class AuthController extends Controller
 {
     use DefaultImage;
-    use GeneralTrait,PhotoTrait;
     public function __construct()
     {
         $this->middleware('jwt')->only('logout','getProfile');
     }//end fun
     public function login(Request $request){
 
+
         $rules = [
-            'name'=>'required|exists:representative,user_name',
+            'user_name'=>'required|exists:representative,user_name',
             'password'=>'required'
         ];
         $validator = Validator::make($request->all(),$rules);
@@ -42,41 +37,59 @@ class AuthController extends Controller
 
             if (delivery()->check()){
                 if (! $token = JWTAuth::fromUser(delivery()->user())) {
-                    return $this->returnError('', 'بيانات الدخول غير صحيحة',403);
+                    return helperJson(null,'there is no user',400);
                 }
-//                delivery()->user()->api_token = $token;
-//                return $this->returnData('data', delivery()->user(),'تم الدخول بنجاح');
-                return helperJson($this->respondWithToken($token,delivery()->user()),'تم الدخول بنجاح');
+                return helperJson($this->respondWithToken($token,delivery()->user()),'good login');
             }else{
-                return $this->returnError('', 'بيانات الدخول غير صحيحة',403);
+                return helperJson(null,'there is no user',400);
             }
 
 
     }//end fun
-
-    public function logout(Request $request){
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function register(Request $request){
         $rules = [
-            'token'    => 'required|exists:representative_tokens,token',
+            'phone_number'=>'required|unique:customers,phone_number',
+            'name'=>'required|min:10|max:191',
+            'address'=>'nullable|min:5|max:191',
+            'city'=>'nullable|min:3|max:191',
+            'photo'=>'nullable',
+            'register_by'=>'nullable'
         ];
         $validator = Validator::make($request->all(),$rules);
-        if ($validator->fails()) {
-            $code = $this->returnCodeAccordingToInput($validator);
-            return $this->returnValidationError($code, $validator);
+        if ($validator->fails()){
+            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],200);
+        }
+        $data = $request->validate($rules);
+
+
+        if ($request->hasFile('photo')){
+            $data['photo'] = $this->uploadFiles('customers',$request->file('photo'));
+        }else{
+            $data['photo'] = $this->storeDefaultImage('customers',$request->name);
         }
 
-//        $token = $request -> header('auth-token');
-//        if($token){
-//            try {
-                RepresentativeToken::where(['token'=>$request->token ])->delete();
-                delivery()->logout();
-//                \Tymon\JWTAuth\Facades\JWTAuth::setToken($token)->invalidate(); //logout
-//            }catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e){
-//                return  $this -> returnError('','some thing went wrongs',403);
-//            }
-            return $this->returnSuccessMessage('Logged out successfully');
-//        }else{
-//            $this -> returnError('','some thing went wrongs');
-//        }
+        $customer = Customers::updateOrCreate($data);
+
+        if ($customer){
+            if (! $token = JWTAuth::fromUser($customer)) {
+                return helperJson(null,'there is no user',400);
+            }
+        }
+
+        return helperJson($this->respondWithToken($token,$customer),'good register');
+
+    }//end fun
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout(Request $request){
+            delivery()->logout();
+            return helperJson(null,'log out successfully',200);
+
 
     }//end fun
     /**
@@ -93,66 +106,57 @@ class AuthController extends Controller
             'expires_in' => delivery()->factory()->getTTL()
         ];
     }//end fun
-//    /**
-//     * @param Request $request
-//     * @return \Illuminate\Http\JsonResponse
-//     */
-//
-//    //======================================================
-//    //======================================================
-//    public function update_profile(Request $request){
-//
-//        $rules = [
-////            'phone_number'=>'required|unique:customers,phone_number',
-//            'id'=>'required|exists:customers,id',
-//            'name'=>'required|min:10|max:191',
-//            'address'=>'nullable|min:5|max:191',
-//            'city'=>'nullable|min:3|max:191',
-//            'photo'=>'nullable',
-//            'register_by'=>'nullable'
-//        ];
-//        $validator = Validator::make($request->all(),$rules);
-//        if ($validator->fails()){
-//            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],200);
-//        }else {
-//            $data = $request->all();
-////            $user = Customers::where('id',$request->id)->first();
-//
-//            if ($request->hasFile('photo')){
-//                $data['photo'] = $this->uploadFiles('customers',$request->file('photo'));
-//            }else{
-//                $data['photo'] = $this->storeDefaultImage('customers',$request->name);
-//            }
-//            $customer = Customers::where('id',$request->id)->update($data);
-//            $data = Customers::where('id',$request->id)->first();
-//
-//            return helperJson($data,'profile updated successfully');
-//        }
-//
-//    }//end fun
-//    //==========================================================
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    //======================================================
+    //======================================================
+    public function update_profile(Request $request){
+
+        $rules = [
+//            'phone_number'=>'required|unique:customers,phone_number',
+            'id'=>'required|exists:customers,id',
+            'name'=>'required|min:10|max:191',
+            'address'=>'nullable|min:5|max:191',
+            'city'=>'nullable|min:3|max:191',
+            'photo'=>'nullable',
+            'register_by'=>'nullable'
+        ];
+        $validator = Validator::make($request->all(),$rules);
+        if ($validator->fails()){
+            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],200);
+        }else {
+            $data = $request->all();
+//            $user = Customers::where('id',$request->id)->first();
+
+            if ($request->hasFile('photo')){
+                $data['photo'] = $this->uploadFiles('customers',$request->file('photo'));
+            }else{
+                $data['photo'] = $this->storeDefaultImage('customers',$request->name);
+            }
+            $customer = Customers::where('id',$request->id)->update($data);
+            $data = Customers::where('id',$request->id)->first();
+
+            return helperJson($data,'profile updated successfully');
+        }
+
+    }//end fun
+    //==========================================================
     //==========================================================
     public function insert_token(Request $request){
         $rules = [
-            'rev_id'   => 'required|exists:representative,id',
-            'token'    => 'required',
-            'type'     => 'required',
+            'phone_token'=>'required',
+            'user_id'=>'required|exists:customers,id',
         ];
-//        $validator = Validator::make($request->all(),$rules);
-//        if ($validator->fails()){
-//            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],200);
-//        }else{
-//            $data = RepresentativeToken::updateOrCreate($request->all());
-//            return helperJson($data,'token added successfully');
-//        }
         $validator = Validator::make($request->all(),$rules);
-        if ($validator->fails()) {
-            $code = $this->returnCodeAccordingToInput($validator);
-            return $this->returnValidationError($code, $validator);
+        if ($validator->fails()){
+            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],200);
+        }else{
+            $data = PhoneToken::updateOrCreate($request->all());
+            return helperJson($data,'token added successfully');
         }
-
-        $data = RepresentativeToken::updateOrCreate($request->all());
-        return $this->returnData('data', $data,'تم بنجاح');
     }//end fun
 
 

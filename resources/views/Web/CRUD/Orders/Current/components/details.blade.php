@@ -14,7 +14,7 @@
         </div>
         <div class="col-2">
             <a class="d-flex align-items-center justify-content-center" >
-                <p class="pl-2 font-weight-bold">الضريبة</p>
+                <p class="pl-2 font-weight-bold">اسم المنتج</p>
             </a>
         </div>
         <div class="col-2">
@@ -24,7 +24,9 @@
         </div>
     </div>
 
+<?php $total = 0; ?>
 @foreach($details as $detail)
+    <?php $total += $detail->subtotal; ?>
     <div class="row">
         <div class="col-6">
             <a class="d-flex align-items-center justify-content-center" >
@@ -52,3 +54,13 @@
         </div>
     </div>
 @endforeach
+<div class="row">
+    <div class="col-10">
+    </div>
+
+    <div class="col-2">
+        <a class="d-flex align-items-center justify-content-center" >
+            <p class="pl-2 font-weight-bold ">{{$total}}</p>
+        </a>
+    </div>
+</div>

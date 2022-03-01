@@ -34,7 +34,7 @@
                                     <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-100">طريقة الاستلام</th>
                                     <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-100">ملاحضات</th>
                                     <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-100">العنوان</th>
-                                    <th class="text-secondary text-xs opacity-100">تحكم</th>
+                                    <th class="text-secondary text-xs opacity-100" style="min-width: 35px;">تحكم</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -101,14 +101,17 @@
                                         </td>
                                         <td class="align-middle ">
                                             <div class="row">
-                                                <a    class=" col-4 accept_element cursor-pointer"  data_route="{{aurl('orders/order_accept/'.$order->id)}}" is_delivary="{{$order->is_delivary}}" data-toggle="tooltip"  data-placement="top"  title="قبول">
+                                                <a    class=" col-3 accept_element cursor-pointer"  data_route="{{aurl('orders/order_accept/'.$order->id)}}" is_delivary="{{$order->is_delivary}}" data-toggle="tooltip"  data-placement="top"  title="قبول">
                                                     {{--                                                        <input type="hidden" name="is_delivary" value="{{$order->is_delivary}}">--}}
                                                     <i class="fa fa-check "  style="color: #122bce"  ></i>
                                                 </a>
-                                                <a    class=" col-4 refuse_element cursor-pointer" data_route="{{aurl('orders/order_refuse/'.$order->id)}}"  data-toggle="tooltip" data-placement="top" title="رفض">
+                                                <a    class=" col-3 refuse_element cursor-pointer" data_route="{{aurl('orders/order_refuse/'.$order->id)}}"  data-toggle="tooltip" data-placement="top" title="رفض">
                                                     <i class="fa fa-times "  style="color: #969794"  ></i>
                                                 </a>
-                                                <a    class=" col-4 delete_element cursor-pointer"  data_delete="{{aurl('orders/order_delete')}}" data_id="{{$order->id}}" data-original-title="delete order" data-toggle="tooltip" data-placement="top" title="حذف">
+                                                <a    class=" col-3 details_element cursor-pointer" data_route="{{aurl('orders/order_details/'.$order->id)}}"  data-toggle="tooltip" data-placement="top" title="التفاصيل">
+                                                    <i class="fas fa-search "  style="color: #0982bf"  ></i>
+                                                </a>
+                                                <a    class=" col-3 delete_element cursor-pointer"  data_delete="{{aurl('orders/order_delete')}}" data_id="{{$order->id}}" data-original-title="delete order" data-toggle="tooltip" data-placement="top" title="حذف">
                                                     <i class="fa fa-trash "  style="color: #ce031b" ></i>
                                                 </a>
                                             </div>
@@ -125,6 +128,32 @@
                     </div>
 
 
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" style="z-index: 999999!important"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+        <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+
+
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-center">
+                    <h5 class="modal-title font-weight-bold" id="exampleModalLongTitle">تفاصيل الطلب</h5>
+
+                </div>
+                <div class="modal-body">
+
+
+
+                </div>
+                <div class="modal-footer text-center d-flex justify-content-center">
+                    <button type="button" class="btn " id="close_model" data-dismiss="modal">اغلاق</button>
                 </div>
             </div>
         </div>
@@ -309,6 +338,30 @@
                 }
             });
         })
+
+
+        //============================  details_element  =======================================
+
+        $(document).on('click','.details_element',function (e) {
+            e.preventDefault()
+            var routeAction = $(this).attr('data_route')
+            var td = $(this)
+            $.ajax({
+                type: 'GET',
+                url: routeAction,
+                data: {},
+                success:function(data){
+                    $('#exampleModalCenter').modal('show')
+                    $('.modal-body').html(data)
+                }
+            });
+
+        })
+        // ============================  close model  ===================================
+        $(document).on('click','#close_model',function (e) {
+            $('#exampleModalCenter').modal('hide')
+        })
     </script>
+
 
 @endpush

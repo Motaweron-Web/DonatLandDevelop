@@ -83,5 +83,18 @@ class OrderController extends Controller
             return response()->json(['data'=>$order,'message'=>'','status'=>'200'],200);
         }
     }
+    //=======================================================
+//    public function branchOrders(Request $request){
+//        $rules = [
+//            'branch_id'=>'required|exists:branches,id'
+//        ];
+//        $validator = Validator::make($request->all(),$rules);
+//        if ($validator->fails()){
+//            return response()->json(['data'=>null,'message'=>$validator->errors(),'code'=>422],422);
+//        }else{
+//            $order = Order::where('branch_id',$request->branch_id)->with('details.product','branch','customer')->get();
+//            return response()->json(['data'=>$order,'message'=>'','code'=>'200'],200);
+//        }
+//    }
 
 }//end class

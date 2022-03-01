@@ -284,7 +284,7 @@
             });
         })
 
-        //============================  refuse_element  =======================================
+        //============================  details_element  =======================================
 
         $(document).on('click','.details_element',function (e) {
             e.preventDefault()

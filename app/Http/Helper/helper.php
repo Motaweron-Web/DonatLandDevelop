@@ -467,6 +467,12 @@ if (!function_exists('delivery')) {
         return auth()->guard('delivery');
     }
 }
+if (!function_exists('branch')) {
+    function branch()
+    {
+        return auth()->guard('branch');
+    }
+}
 
 if (!function_exists('get_admin_auth')) {
     function get_admin_auth()
@@ -650,19 +656,19 @@ if (!function_exists('create_qr_code')) {
 
 if (!function_exists('get_old_price')) {
     function get_old_price($price ,$productObj ) {
-        if($productObj->have_offer == "yes"){
-            if($productObj->offer_type == "per"){
-                $discount = ( $price *  $productObj->offer_value  ) / 100 ;
-                return  ($price - $discount );
-            }
-            elseif ($productObj->offer_type == "val"){
-                return  ($price - $productObj->offer_value );
-            }
-            elseif ($productObj->offer_type == "amount"){
-                return  $price ;
-            }
-        }
-        return $price;
+      if($productObj->have_offer == "yes"){
+          if($productObj->offer_type == "per"){
+              $discount = ( $price *  $productObj->offer_value  ) / 100 ;
+              return  ($price - $discount );
+          }
+          elseif ($productObj->offer_type == "val"){
+              return  ($price - $productObj->offer_value );
+          }
+          elseif ($productObj->offer_type == "amount"){
+              return  $price ;
+          }
+      }
+      return $price;
     }
 }
 
@@ -670,28 +676,28 @@ if (!function_exists('get_old_price')) {
 if (!function_exists('all_order_count')) {
     function all_order_count() {
         $order_count = \App\Models\Bills::count();
-        return $order_count;
+      return $order_count;
     }
 }
 
 if (!function_exists('new_order_count')) {
     function new_order_count() {
         $order_count = \App\Models\Bills::where([['status','=', 'new']])->count();
-        return $order_count;
+      return $order_count;
     }
 }
 
 if (!function_exists('preparing_order_count')) {
     function preparing_order_count() {
         $order_count = \App\Models\Bills::where([['status','=', 'preparing']])->count();
-        return $order_count;
+      return $order_count;
     }
 }
 
 if (!function_exists('ready_order_count')) {
     function ready_order_count() {
         $order_count = \App\Models\Bills::where([['status','=', 'ready']])->count();
-        return $order_count;
+      return $order_count;
     }
 }
 
@@ -706,13 +712,13 @@ if (!function_exists('finish_order_count')) {
 if (!function_exists('cancel_order_count')) {
     function cancel_order_count() {
         $order_count = \App\Models\Bills::where([['status','=', 'cancel']])->count();
-        return $order_count;
+      return $order_count;
     }
 }
 if (!function_exists('helperJson')) {
     function helperJson($data=null,$message='',$code=200,$status=200) {
-        $json = response()->json(['data'=>$data,'message'=>$message,'status'=>$code],$status);
-        return $json;
+        $json = response()->json(['data'=>$data,'message'=>$message,'code'=>$code],$status);
+      return $json;
     }
 }
 if (!function_exists('get_file')) {
@@ -730,66 +736,17 @@ if (!function_exists('get_file')) {
         return $image!=null?asset($image):asset('assets/default/img/empty.png');
     }
 }
+if (!function_exists('get_token')) {
+    function get_token() {
 
-if (!function_exists('fireBase')) {
-//    function fireBase($user_id, $rev_id, $order_id, $message , )
-    function fireBase($user_id, $rev_id, $order_id, $message , $from_type = 'driver' , $to_type= 'customer' )
-    {
-        if ($from_type=='driver') $from_user_id = $rev_id;
-        elseif ($from_type=='customer') $from_user_id = $user_id;
-        else $from_user_id = null;
+        $token = null;
+        if (request()->header('token') && request()->header('token') != null)
+            $token = request()->header('token');
+        elseif(request()->get('token') && request()->get('token') != null)
+            $token = request()->get('token');
+        elseif(request()->token && request()->token != null)
+            $token = request()->token;
 
-        if ($to_type=='driver') $to_user_id = $rev_id;
-        elseif ($to_type=='customer') $to_user_id = $user_id;
-
-        $data = [
-            'from_user_type' => $from_type,
-            'to_user_type' => $to_type,
-            'from_user_id' =>  $from_user_id,
-            'to_user_id' => $to_user_id,
-            'order_id' => $order_id,
-            'title' => 'إشعار جديد',
-            'message' => $message,
-            'date' => strtotime(date('Y-m-d H:i:s')),
-        ];
-
-
-        $new = \App\Models\Notification::create($data);
-        $url = 'https://fcm.googleapis.com/fcm/send';
-        $representative_tokens = \App\Models\RepresentativeToken::where('rev_id', $rev_id)->pluck('token')->toArray();
-        $user_tokens = \App\Models\PhoneToken::where('user_id', $user_id)->pluck('phone_token')->toArray();
-
-
-        if($user_id != null) {
-            $fields = array(
-                'registration_ids' => $user_tokens,
-                'data' => $data['title'],
-                'notification' => $data['message']
-            );
-        }
-        else{
-            $fields = array(
-                'registration_ids' => $representative_tokens,
-                'data' => $data['title'],
-                'notification' => $data['message']
-            );
-        }
-        $fields = json_encode($fields);
-        $headers = array(
-            'Authorization: key=' . "AAAAXWPBF04:APA91bGfESEoSN6biRuJJ5XwUlQGLjfZR8QE6WFfZeb0vxkcHKsNezGpqYNJsZAoLkVgJeD0jHZykofWQfG_z8JNXK6kBV3t1PQrYsOU96ojs4pKxgkfHUHF9M0Wu8_Yq9EsbQpYFzV-",
-            'Content-Type: application/json'
-        );
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-
-        $result = curl_exec($ch);
-//           echo $result;
-        curl_close($ch);
-        return $result;
-    }//end fun
+        return $token;
+    }
 }
